@@ -10,10 +10,11 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+    console.log('empty for now')
+    db.getUsers()
       .then(data => {
         const users = data.rows;
-        res.json({ users });
+        res.json( {users} );
       })
       .catch(err => {
         res
@@ -21,5 +22,22 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.get("/:id", (req, res) => {
+    console.log('the URL ID: ',req.params.id)
+    db.getUserByID(req.params.id)
+      .then(data => {
+        res.json( data[0] );
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+
+
+
   return router;
 };
