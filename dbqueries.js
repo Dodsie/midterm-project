@@ -47,6 +47,7 @@ const getActiveOrders = function (userID) {
   return db
   .query(queryString,[userID])
   .then(details => {
+    //console.log(details.rows)
     return details.rows;
   }).catch (err => {
     console.log(err.message)
@@ -68,6 +69,7 @@ const getTotalCostByActive = function (userID) {
   return db
   .query(queryString,[userID])
   .then(totalcost => {
+    console.log(totalcost.rows)
     return totalcost.rows;
   }).catch (err => {
     console.log(err.message)
