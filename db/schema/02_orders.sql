@@ -5,4 +5,5 @@ CREATE TABLE orders (
   active BOOLEAN NOT NULL DEFAULT TRUE,
   address VARCHAR(255),
   order_date DATE
+  -- total_price INTEGER
 );

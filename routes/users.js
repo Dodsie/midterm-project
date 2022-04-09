@@ -36,6 +36,35 @@ module.exports = (db) => {
       });
   });
 
+  // get order details. /2/myorders
+  // router.get('/:id/myorders', (req,res) => {
+  //   db.getActiveOrders(req.params.id)
+  //   .then(results => {
+  //     console.log(results)
+  //     //results.push(db.getTotalCostByOrderID(2))
+  //     res.json(results) //gets all active orders for a user in a array of objs
+  //   }).catch(err => {
+  //     res
+  //       .status(500)
+  //       .json({ error: err.message });
+  //   });
+  // });
+
+  //TESTING
+  router.get('/:id/myorders', (req,res) => {
+    Promise.all([db.getActiveOrders(req.params.id),db.getTotalCostByActive(req.params.id)])
+      .then(results => {
+        let final = results[0];
+        for (const item of results[1]) {
+          final.push(item)
+        }
+        res.json(final) //gets all active orders for a user in a array of objs
+      }).catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    });
 
 
 
