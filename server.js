@@ -7,7 +7,7 @@ require("dotenv").config();
 // const db = new Pool(dbParams);
 // db.connect(()=>{console.log(`connected to db ${process.env.DB_PORT}`)});
 
-const db = require('./dbqueries')
+const db = require('./dbqueries');
 
 // Web server config
 const PORT = process.env.PORT || 8080;
