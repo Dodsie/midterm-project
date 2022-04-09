@@ -36,19 +36,6 @@ module.exports = (db) => {
       });
   });
 
-  // get order details. /2/myorders
-  // router.get('/:id/myorders', (req,res) => {
-  //   db.getActiveOrders(req.params.id)
-  //   .then(results => {
-  //     console.log(results)
-  //     //results.push(db.getTotalCostByOrderID(2))
-  //     res.json(results) //gets all active orders for a user in a array of objs
-  //   }).catch(err => {
-  //     res
-  //       .status(500)
-  //       .json({ error: err.message });
-  //   });
-  // });
 
   //TESTING
   router.get('/:id/myorders', (req,res) => {

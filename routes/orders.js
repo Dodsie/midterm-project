@@ -4,13 +4,15 @@ const router  = express.Router();
 //localhost:8080/orders/
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    //empty for now can display menu items.
-    res.send('hello orders page')
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    db.getMenu()
+    .then (result => {
+      res.json(result)
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
   });
 
 
