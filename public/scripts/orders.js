@@ -7,16 +7,16 @@ function renderProducts(data) {
     <div id="individual-box" class="col mb-5">
       <div id="product-items" class="card h-100">
           <!-- Product image-->
-          <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+          <img class="card-img-top" src=${x.photo} alt="..." />
           <!-- Product details-->
           <div id="product-descriptions" class="card-body p-4">
               <div class="text-center">
                   <!-- Product name-->
                   <h5 class="fw-bolder">${x.name}</h5>
                   <!-- Product description-->
-                  <p>This will the where our product description goes. This will the where our product description goes.</p>
+                  <p>${x.description}</p>
                   <!-- Product price-->
-                  ${x.price}
+                   Price: $${x.price}
               </div>
           </div>
           <!-- Product actions-->
@@ -44,7 +44,6 @@ $(() => {
   $.get('/orders/menu',(data,status) => {
     console.log(data[0]);
     renderProducts(data)
-    //$("#product-boxes").append(``)
   })
 
 

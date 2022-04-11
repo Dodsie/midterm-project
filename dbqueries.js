@@ -78,7 +78,7 @@ const getTotalCostByActive = function (userID) {
 
 const getMenu = function () {
   return db
-  .query(`SELECT name, price FROM menu_items`)
+  .query(`SELECT name, price, photo, description FROM menu_items`)
   .then(menu => {
     return menu.rows
   }).catch (err => {
