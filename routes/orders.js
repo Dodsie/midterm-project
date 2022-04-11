@@ -5,20 +5,20 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.getMenu()
-    .then (result => {
-      res.json(result)
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+      .then(result => {
+        res.json(result);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
 
 
   router.get("/cart", (req, res) => {
     //empty for now can display menu items.
-    res.send('hello carts page')
+    res.render("cart")
       .catch(err => {
         res
           .status(500)
@@ -29,12 +29,21 @@ module.exports = (db) => {
   // TEST ROUTE TO SEE IF GETPRICEBYITEMID WORK
   router.get("/cart/:id", (req, res) => {
     db.getPriceByItemID(req.params.id)
-    .then (itemprice => {
-      console.log(itemprice[0])
-      res.json(itemprice[0].price)
-    })
+      .then(itemprice => {
+        console.log(itemprice[0]);
+        res.json(itemprice[0].price);
+      })
       .catch(err => {
-        console.log('this is error')
+        console.log('this is error');
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  router.get("/menu", (req, res) => {
+    res.render("product-page")
+      .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
