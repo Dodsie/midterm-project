@@ -1,0 +1,42 @@
+// product whole-box
+#product-boxes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// individual item container
+#individual-box {
+  display: row;
+  width: 90%
+}
+
+// product-image
+.card-img-top {
+  padding: 35px;
+}
+
+#product-items {
+  flex-direction: row;
+  justify-content: space-around;
+  min-width: 600px;
+}
+
+// product descriptions container
+#product-descriptions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 400px;
+  min-width: 300px;
+}
+
+// add-to-cart button container
+#add-to-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 200px;
+}
+
+
