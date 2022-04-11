@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+const sendSMS = require('../sendSMS')
 
 //localhost:8080/orders/
 module.exports = (db) => {
@@ -33,7 +34,11 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/menu", (req, res) => {
+    sendSMS.sendSMS();
+    res.render("product-page");
 
+  });
 
 
 
