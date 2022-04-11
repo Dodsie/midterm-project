@@ -25,7 +25,7 @@ app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-
+console.log(__dirname)
 app.use(
   "/styles",
   sassMiddleware({
@@ -58,6 +58,7 @@ app.use("/orders", ordersRoutes(db));
 
 app.get("/", (req, res) => {
   res.render("index");
+  console.log(process.env)
 });
 
 app.listen(PORT, () => {

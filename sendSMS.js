@@ -1,4 +1,6 @@
-const client = require('twilio')('AC0f90a880ab97c87fcd9ca8e3ef0f2dd1', 'c4f3f3733a1c96be9e7a46a2d528fc6a');
+
+
+const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 
 function sendSMS () {
