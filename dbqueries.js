@@ -88,4 +88,4 @@ const getMenu = function () {
 
 
 
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByActive, getMenu}
+module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByActive, getMenu, getPriceByItemID}

@@ -46,7 +46,7 @@ const ordersRoutes = require("./routes/orders");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
-app.use("/widgets", widgetsRoutes(db));
+//app.use("/widgets", widgetsRoutes(db));
 
 // localhost:8080/orders/
 app.use("/orders", ordersRoutes(db));

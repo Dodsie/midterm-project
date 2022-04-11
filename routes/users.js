@@ -23,6 +23,16 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/:id/cart", (req, res) => {
+    //empty for now can display menu items.
+    res.send('hello carts page')
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
   router.get("/:id", (req, res) => {
     console.log('the URL ID: ',req.params.id)
     db.getUserByID(req.params.id)

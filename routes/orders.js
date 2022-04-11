@@ -16,15 +16,7 @@ module.exports = (db) => {
   });
 
 
-  router.get("/cart", (req, res) => {
-    //empty for now can display menu items.
-    res.send('hello carts page')
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+
 
   // TEST ROUTE TO SEE IF GETPRICEBYITEMID WORK
   router.get("/cart/:id", (req, res) => {
