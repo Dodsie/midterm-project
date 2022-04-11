@@ -8,4 +8,4 @@ VALUES ('fries', 6);
 INSERT INTO menu_items (name, price)
 VALUES ('pop', 1);
 INSERT INTO menu_items (name, price)
-VALUES ('ham', 2);
+VALUES ('burgers', 20);

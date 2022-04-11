@@ -4,7 +4,7 @@ const sendSMS = require('../sendSMS')
 
 //localhost:8080/orders/
 module.exports = (db) => {
-  router.get("/", (req, res) => {
+  router.get("/menu", (req, res) => {
     db.getMenu()
       .then(result => {
         res.json(result);
@@ -43,9 +43,10 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/menu", (req, res) => {
-    sendSMS.sendSMS();
-    res.render("product-page")
+  router.get("/", (req, res) => {
+    //sendSMS.sendSMS();
+    const temp = {name:'hotdog'}
+    res.render("product-page",temp)
       .catch(err => {
         res
           .status(500)
