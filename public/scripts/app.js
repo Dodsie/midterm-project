@@ -92,6 +92,19 @@ $(() => {
   // $("#menuitems").append(menuitems)
   // $("#menuitems").append(menuitems)
 
+  $(".continue-shopping").on("submit", function(event) {
+    event.preventDefault();
+    console.log("button works again!");
+    window.location.href="menu";
+  });
+
+  $('.d-flex').on('submit', function(event) {
+    event.preventDefault();
+    window.location.href="cart";
+
+  });
 
 
-})
+
+});
+
