@@ -1,11 +1,10 @@
 INSERT INTO menu_items (name, price)
-VALUES ('hotdog', 5);
-
+VALUES ('Andy', 10);
 INSERT INTO menu_items (name, price)
-VALUES ('pizza', 10);
+VALUES ('Nally', 10);
 INSERT INTO menu_items (name, price)
-VALUES ('fries', 6);
+VALUES ('David', 8);
 INSERT INTO menu_items (name, price)
-VALUES ('pop', 1);
+VALUES ('Edward', 69);
 INSERT INTO menu_items (name, price)
-VALUES ('ham', 2);
+VALUES ('Will Smith Slap', 1 );

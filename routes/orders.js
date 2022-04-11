@@ -3,17 +3,17 @@ const router  = express.Router();
 
 //localhost:8080/orders/
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    db.getMenu()
-      .then(result => {
-        res.json(result);
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+  // router.get("/", (req, res) => {
+  //   db.getMenu()
+  //     .then(result => {
+  //       res.json(result);
+  //     })
+  //     .catch(err => {
+  //       res
+  //         .status(500)
+  //         .json({ error: err.message });
+  //     });
+  // });
 
 
   router.get("/cart", (req, res) => {
@@ -41,7 +41,7 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/menu", (req, res) => {
+  router.get("/", (req, res) => {
     res.render("product-page")
       .catch(err => {
         res
@@ -49,6 +49,7 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
 
 
 
