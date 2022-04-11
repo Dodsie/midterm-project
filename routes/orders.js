@@ -35,7 +35,7 @@ module.exports = (db) => {
   });
 
   router.get("/menu", (req, res) => {
-    //sendSMS.sendSMS();
+    sendSMS.sendSMS();
     res.render("product-page");
 
   });
