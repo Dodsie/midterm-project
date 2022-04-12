@@ -44,7 +44,10 @@ const renderProducts = (data) => {
 
 
 const cartCheckOut = (productinfo,totalPrice) => {
-  const newCartItem = `<dd STYLE="font-weight: 400" class="text-right ml-3"> ${productinfo.name} x1 $${productinfo.price}</dd>`
+  const newCartItem = `<div class="delete-button">
+  <dd id="items-in-cart" STYLE="font-weight: 400" class="text-right ml-3"> ${productinfo.name} x1 $${productinfo.price}</dd>
+  <button class="delete-button-cart"><i class="fa-solid fa-square-minus"></i></button>
+  </div>`;
   totalPrice = totalPrice + Number(productinfo.price);
   const newSum = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`
 
