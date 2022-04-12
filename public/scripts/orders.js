@@ -1,6 +1,6 @@
 // Client facing scripts here
 
-function renderProducts(data) {
+const renderProducts = (data) => {
   const res = [];
   for (const x of data) {
     const menuitem = `
@@ -17,6 +17,12 @@ function renderProducts(data) {
                   <p>${x.description}</p>
                   <!-- Product price-->
                    Price: $${x.price}
+                   <br>
+                   <div class="quantity buttons_added">
+                 <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                   </div>
+                   <br>
+                   <button type='button' id='addtocart' class="btn btn-outline-dark mt-auto" >Add to order</button></div>
               </div>
           </div>
           <!-- Product actions-->
@@ -24,24 +30,24 @@ function renderProducts(data) {
             <div class="text-center">
 
 
-              <button type='button' id='addtocart' class="btn btn-outline-dark mt-auto" >Add to order</button></div>
+
 
 
             </div>
           </div>
       </div>
     </div>
-    `
+    `;
 
-    res.push(menuitem)
+    res.push(menuitem);
   }
 
-  $("#product-boxes").append(res)
+  $("#product-boxes").append(res);
 
 };
 
 
-function cartCheckOut() {
+const cartCheckOut = () => {
 
   const checkoutbox = `
   <aside id="checkout-box" class="col-lg-3">
@@ -68,18 +74,21 @@ function cartCheckOut() {
                 <dt>Total:</dt>
                 <dd class="text-right text-dark b ml-3"><strong>$59.97</strong></dd>
             </dl>
-            <hr> <button type="submit" class="btn btn-out btn-primary btn-square btn-main" id="place-order"> Place Order </a>
+            <hr>
+            <div class="cart-buttons">
+            <button type="submit" class="btn btn-out btn-primary btn-square btn-main" id="place-order"> Place Order </a>
               <form class="continue-shopping">
             <button type="submit" class="btn btn-out btn-success btn-square btn-main mt-2">Continue Shopping</button>
               </form>
+            </div>
         </div>
     </div>
   </aside>
-`
-  $(".checkout-side").append(checkoutbox)
+`;
+  $(".checkout-side").append(checkoutbox);
 
-}
-
+};
+cartCheckOut()
 
 
 
@@ -88,18 +97,18 @@ $(() => {
 
   $.get('/orders/menu',(data,status) => {
     //console.log(data[0]);
-    renderProducts(data)
+    renderProducts(data);
     //cartCheckOut();
-  }).catch (err => console.log(err))
+  }).catch(err => console.log(err));
 
 
 
 
 
-  $(document).on('click','#addtocart',function(){
+  $(document).on('click','#addtocart',function() {
     alert("button");
-    console.log('test')
-    console.log(this)
+    console.log('test');
+    console.log(this);
   });
 
 
