@@ -38,20 +38,6 @@ function renderProducts() {
 const $mainbody = $('<menu.items>')
 
 $(() => {
-  // const db = require('../../dbqueries');
-  // const menu_items = db.getMenu();
-  // console.log('hello');
-  // $('.addtocart').on('click', (event) => {
-  //   console.log('pressed')
-  // })
-
-  //console.log(typeof renderProducts());
-
-  // $("#menuitems").append(menuitems)
-  //$("#product-boxes").append(menuitems)
-
-//  renderProducts();
-
   $(".continue-shopping").on("submit", function(event) {
     event.preventDefault();
     console.log("button works again!");
@@ -64,19 +50,10 @@ $(() => {
   $('.d-flex').on('submit', function(event) {
     event.preventDefault();
     window.location.href="/orders/cart";
+    console.log('button')
 
   });
 
-  $.get('/orders/menu',(data,status) => {
-    console.log(data[0]);
-    // $("#product-boxes").append(``)
-  })
-
-  // $(".continue-shopping").on("submit", function(event) {
-  //   event.preventDefault();
-  //   console.log("button works again!");
-  //   window.location.href="/orders/";
-  // });
 
 
 

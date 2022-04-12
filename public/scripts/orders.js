@@ -21,7 +21,7 @@ function renderProducts(data) {
           </div>
           <!-- Product actions-->
           <div id="add-to-cart" class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-              <div id="cart-button" class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to order</a></div>
+              <div class="text-center"><a id="addtocart" class="btn btn-outline-dark mt-auto" href="#">Add to order</a></div>
           </div>
       </div>
     </div>
@@ -42,11 +42,16 @@ const $mainbody = $('<menu.items>')
 $(() => {
 
   $.get('/orders/menu',(data,status) => {
-    console.log(data[0]);
+    //console.log(data[0]);
     renderProducts(data)
-  })
+  }).catch (err => console.log(err))
 
 
+  // $('#addtocart').on('submit', function(event) {
+  //   event.preventDefault();
+  //   console.log('button')
+
+  // });
 
 
 });

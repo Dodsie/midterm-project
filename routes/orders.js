@@ -45,13 +45,8 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     //sendSMS.sendSMS();
-    const temp = {name:'hotdog'}
-    res.render("product-page",temp)
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+    res.render("product-page")
+
   });
 
 
