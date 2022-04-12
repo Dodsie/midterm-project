@@ -25,7 +25,7 @@ app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-
+console.log(__dirname)
 app.use(
   "/styles",
   sassMiddleware({
@@ -46,7 +46,7 @@ const ordersRoutes = require("./routes/orders");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/users", usersRoutes(db));
-app.use("/widgets", widgetsRoutes(db));
+//app.use("/widgets", widgetsRoutes(db));
 
 // localhost:8080/orders/
 app.use("/orders", ordersRoutes(db));
@@ -58,6 +58,7 @@ app.use("/orders", ordersRoutes(db));
 
 app.get("/", (req, res) => {
   res.render("index");
+  console.log(process.env)
 });
 
 app.listen(PORT, () => {
