@@ -1,5 +1,4 @@
 // Client facing scripts here
-
 const renderProducts = (data) => {
   const res = [];
   for (const x of data) {
@@ -49,7 +48,7 @@ const cartCheckOut = (productinfo,totalPrice) => {
   <button class="delete-button-cart"><i class="fa-solid fa-square-minus"></i></button>
   </div>`;
   totalPrice = totalPrice + Number(productinfo.price);
-  const newSum = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`
+  const newSum = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
 
   const checkoutbox = `
   <aside id="checkout-box" class="col-lg-3">
@@ -97,17 +96,17 @@ const cartCheckOut = (productinfo,totalPrice) => {
         </div>
     </div>
   </aside>`;
-  const PST = (totalPrice*0.07).toFixed(2)
-  const GST = (totalPrice*0.05).toFixed(2)
-  const cartTotal = (Number(PST) + Number(GST) + totalPrice).toFixed(2)
-  $('#PST').text(`$${PST}`)
-  $('#GST').text(`$${GST}`)
-  $("#yourItems").append(newCartItem)
+  const PST = (totalPrice * 0.07).toFixed(2);
+  const GST = (totalPrice * 0.05).toFixed(2);
+  const cartTotal = (Number(PST) + Number(GST) + totalPrice).toFixed(2);
+  $('#PST').text(`$${PST}`);
+  $('#GST').text(`$${GST}`);
+  $("#yourItems").append(newCartItem);
   $("#sum").replaceWith(newSum);
-  $('#cartTotal').text(`$${cartTotal}`)
+  $('#cartTotal').text(`$${cartTotal}`);
   $(".checkout-side").replaceWith(checkoutbox);
 
-  return Number(totalPrice)
+  return Number(totalPrice);
 
 };
 
@@ -120,27 +119,38 @@ $(() => {
   $.get('/orders/menu',(data,status) => {
     //console.log(data[0]);
     renderProducts(data);
-    productdets ={};
+    productdets = {};
     cartCheckOut(productdets);
 
   }).catch(err => console.log(err));
 
 
 
-
-
-
-  $(document).on('click','#addtocart',function(){
-    let parent = $(this)
+  $(document).on('click','#addtocart',function() {
+    let parent = $(this);
     let productdets = {
       name: parent.siblings("#productname").text(),
       price : parent.siblings("#productprice").text().slice(8)
     };
 
-    console.log (productdets)
+    console.log(productdets);
     totalPrice = cartCheckOut(productdets,totalPrice);
   });
 
+  $(document).on('click','.delete-button-cart',function() {
+    const newSum1 = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
+    $(this).parent().remove();
+
+    let parent = $($(this));
+    let productdets = {
+      name: parent.siblings("#productname").text(),
+      price : parent.siblings("#productprice").text().slice(8)
+    };
+    totalPrice = (totalPrice -= Number(productdets.price));
+    console.log(totalPrice);
+    $('#sum').replaceWith(newSum1);
+    console.log(typeof totalPrice);
+  });
 
 
 
