@@ -63,6 +63,10 @@ const cartCheckOut = () => {
     <div class="card">
         <div class="card-body">
             <dl class="dlist-align">
+                <dt>Your items:</dt>
+                <dd class="text-right ml-3">- Add your items here</dd>
+            </dl>
+            <dl class="dlist-align">
                 <dt>Total price:</dt>
                 <dd class="text-right ml-3">$69.97</dd>
             </dl>
