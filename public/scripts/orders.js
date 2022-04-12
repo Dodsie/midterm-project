@@ -22,10 +22,11 @@ function renderProducts(data) {
           <!-- Product actions-->
           <div id="add-to-cart" class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
-              <form class="addtocart">
-                <label>Add to Cart</label>
-                <button type='submit' class="btn btn-outline-dark mt-auto"</button>
-              </form>
+
+
+              <button type='button' id='addtocart' class="btn btn-outline-dark mt-auto" >Add to order</button></div>
+
+
             </div>
           </div>
       </div>
@@ -82,26 +83,30 @@ function cartCheckOut() {
 
 
 
-const $mainbody = $('<menu.items>')
 
 $(() => {
 
   $.get('/orders/menu',(data,status) => {
     //console.log(data[0]);
     renderProducts(data)
-    cartCheckOut();
+    //cartCheckOut();
   }).catch (err => console.log(err))
 
 
 
 
 
-
-  $('.addtocart').on('submit', function(event) {
-    event.preventDefault();
-    console.log('button')
-
+  $(document).on('click','#addtocart',function(){
+    alert("button");
+    console.log('test')
+    console.log(this)
   });
 
+
+
 });
+
+
+
+
 
