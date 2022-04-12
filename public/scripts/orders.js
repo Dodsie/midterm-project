@@ -122,11 +122,6 @@ $(() => {
 
   }).catch(err => console.log(err));
 
-
-
-
-
-
   $(document).on('click','#addtocart',function(){
     let parent = $(this)
     let productdets = {
@@ -137,10 +132,6 @@ $(() => {
     console.log (productdets)
     totalPrice = cartCheckOut(productdets,totalPrice);
   });
-
-
-
-
 
 });
 
