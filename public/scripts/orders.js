@@ -92,7 +92,7 @@ const cartCheckOut = () => {
   $(".checkout-side").append(checkoutbox);
 
 };
-cartCheckOut()
+cartCheckOut();
 
 
 
