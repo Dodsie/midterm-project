@@ -17,6 +17,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
         <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
         <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+        <link rel="stylesheet" href="/styles/my-orders.css" type="text/css" />
     </head>
     <body>
         <!-- Navigation-->
@@ -59,31 +60,61 @@
         </header>
         <!-- Section-->
         <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
+            <section class="h-100 h-custom" style="background-color: #eee;">
+                <div class="container py-5 h-100">
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-8 col-xl-6">
+                      <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
+                        <div class="card-body p-5">
 
-                <div id ="menuitems" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-                                    <!-- Product price-->
-                                    $40.00 - $80.00
-                                </div>
+                          <p class="lead fw-bold mb-5" style="color: #f37a27;">Purchase Reciept</p>
+
+                          <div class="row">
+                            <div class="col mb-3">
+                              <p class="small text-muted mb-1">Date</p>
+                              <p>10 April 2021</p>
                             </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto addtocart" href="#">View options</a></div>
+                            <div class="col mb-3">
+                              <p class="small text-muted mb-1">Order No.</p>
+                              <p>012j1gvs356c</p>
                             </div>
+                          </div>
+
+                          <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
+                            <div class="row">
+                              <div class="col-md-8 col-lg-9">
+                                <p>BEATS Solo 3 Wireless Headphones</p>
+                              </div>
+                              <div class="col-md-4 col-lg-3">
+                                <p>£299.99</p>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-8 col-lg-9">
+                                <p class="mb-0">Shipping</p>
+                              </div>
+                              <div class="col-md-4 col-lg-3">
+                                <p class="mb-0">£33.00</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row my-4">
+                            <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
+                              <p class="lead fw-bold mb-0" style="color: #f37a27;">£262.99</p>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-12">
+                              <div class="horizontal-timeline">
+                               </div>
+                            </div>
+                          </div>
                         </div>
+                      </div>
                     </div>
-
+                  </div>
                 </div>
-            </div>
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-dark">

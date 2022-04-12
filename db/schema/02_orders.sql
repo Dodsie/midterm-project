@@ -4,6 +4,6 @@ CREATE TABLE orders (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   active BOOLEAN NOT NULL DEFAULT TRUE,
   address VARCHAR(255),
-  order_date DATE
-  -- total_price INTEGER
+  order_date DATE,
+  total INTEGER
 );
