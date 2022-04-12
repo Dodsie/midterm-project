@@ -12,7 +12,6 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    console.log('empty for now')
     db.getUsers()
       .then(data => {
         const users = data.rows;
@@ -25,13 +24,20 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/:id/del", (req, res) => {
+    res.clearCookie(req.params.id);
+    res.send('cookies cleared.')
+  })
+
+  router.get('/:id/login', (req,res) => {
+    res.cookie(req.params.id,req.params.id);
+    res.send('logged in')
+  })
+
 
 
   router.get("/:id", (req, res) => {
-    res.cookie('testaccount',req.params.id);
-
-
-    db.getUserByID(req.params.id)
+    db.getUserByID(req.cookies.testaccount)
       .then(data => {
         res.json( data[0] );
       })
@@ -42,8 +48,9 @@ module.exports = (db) => {
       });
   });
 
-
+    //for AJAX to get DB INFO
     router.get('/:id/getmyorders', (req,res) => {
+      console.log(req.cookies.testaccount)
       db.getActiveOrders(req.params.id)
       .then(results => {
         res.json(results) //gets all active orders for a user in a array of objs
@@ -54,11 +61,12 @@ module.exports = (db) => {
       });
     });
 
+    //for AJAX to get DB INFO
     router.get('/:id/activeTotals', (req,res) => {
       db.getTotalCostByUser(req.params.id)
       .then(results => {
         res.json(results) //gets all active orders for a user in a array of objs
-        console.log('did it get here')
+
       }).catch(err => {
         res
           .status(500)
