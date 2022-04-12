@@ -23,15 +23,7 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/:id/cart", (req, res) => {
-    //empty for now can display menu items.
-    res.send('hello carts page')
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+
 
   router.get("/:id", (req, res) => {
     console.log('the URL ID: ',req.params.id)
@@ -48,7 +40,7 @@ module.exports = (db) => {
 
 
   //TESTING
-  router.get('/:id/myorders', (req,res) => {
+  router.get('/:id/getmyorders', (req,res) => {
     Promise.all([db.getActiveOrders(req.params.id),db.getTotalCostByActive(req.params.id)])
       .then(results => {
         let final = results[0];
@@ -62,6 +54,11 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
     });
+
+    router.get('/:id/myorders', (req,res) => {
+      res.render("myOrders")
+
+      });
 
 
 

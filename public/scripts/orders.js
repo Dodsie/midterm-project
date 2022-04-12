@@ -16,7 +16,7 @@ const renderProducts = (data) => {
                     <!-- Product description-->
                     <p id="productdesc">${x.description}</p>
                     <!-- Product price-->
-                    <p id="productprice">Price: $${x.price}</p>
+                    <p id="productprice">Price: $${x.price.toFixed(2)}</p>
                    <br>
                    <div class="quantity buttons_added">
                  <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
@@ -28,10 +28,6 @@ const renderProducts = (data) => {
           <!-- Product actions-->
           <div id="add-to-cart" class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
-
-
-
-
 
             </div>
           </div>
@@ -48,11 +44,10 @@ const renderProducts = (data) => {
 
 
 const cartCheckOut = (productinfo,totalPrice) => {
-  const newCartItem = `<dd class="text-right ml-3"> ${productinfo.name} x1 $${productinfo.price}</dd>`
+  const newCartItem = `<dd STYLE="font-weight: 400" class="text-right ml-3"> ${productinfo.name} x1 $${productinfo.price}</dd>`
   totalPrice = totalPrice + Number(productinfo.price);
-  const newSum = `<dd id='sum' class="text-right">$${totalPrice} </dd>`
-  const GST = 5;
-  const PST = 7;
+  const newSum = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`
+
   const checkoutbox = `
   <aside id="checkout-box" class="col-lg-3">
     <div class="card mb-3">
@@ -79,15 +74,15 @@ const cartCheckOut = (productinfo,totalPrice) => {
 
             </dl>
             <dl class="dlist-align">
-                <dt>PST:</dt>
-                <dd class="text-right text-danger ml-3"> 7.00%</dd>
+                <dt>PST (7%):</dt>
+                <dd id='PST' class="text-right text-danger ml-3"> 7.00%</dd>
                 <dl class="dlist-align">
-                <dt>GST:</dt>
-                <dd class="text-right text-danger ml-3">  5.00%</dd>
+                <dt>GST (5%):</dt>
+                <dd id='GST' class="text-right text-danger ml-3">  5.00%</dd>
             </dl>
             <dl class="dlist-align">
                 <dt>Total:</dt>
-                <dd class="text-right text-dark b ml-3"><strong>$59.97</strong></dd>
+                <dd id='cartTotal' class="text-right text-dark b ml-3"><strong>$59.97</strong></dd>
             </dl>
             <hr>
             <div class="cart-buttons">
@@ -99,8 +94,14 @@ const cartCheckOut = (productinfo,totalPrice) => {
         </div>
     </div>
   </aside>`;
+  const PST = (totalPrice*0.07).toFixed(2)
+  const GST = (totalPrice*0.05).toFixed(2)
+  const cartTotal = (Number(PST) + Number(GST) + totalPrice).toFixed(2)
+  $('#PST').text(`$${PST}`)
+  $('#GST').text(`$${GST}`)
   $("#yourItems").append(newCartItem)
   $("#sum").replaceWith(newSum);
+  $('#cartTotal').text(`$${cartTotal}`)
   $(".checkout-side").replaceWith(checkoutbox);
 
   return Number(totalPrice)
