@@ -11,12 +11,12 @@ const renderProducts = (data) => {
           <!-- Product details-->
           <div id="product-descriptions" class="card-body p-4">
               <div class="text-center">
-                  <!-- Product name-->
-                  <h5 class="fw-bolder">${x.name}</h5>
-                  <!-- Product description-->
-                  <p>${x.description}</p>
-                  <!-- Product price-->
-                   Price: $${x.price}
+                    <!-- Product name-->
+                    <h5 id="productname" class="fw-bolder">${x.name}</h5>
+                    <!-- Product description-->
+                    <p id="productdesc">${x.description}</p>
+                    <!-- Product price-->
+                    <p id="productprice">Price: $${x.price}</p>
                    <br>
                    <div class="quantity buttons_added">
                  <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
@@ -47,8 +47,12 @@ const renderProducts = (data) => {
 };
 
 
-const cartCheckOut = () => {
-
+const cartCheckOut = (productinfo,totalPrice) => {
+  const newCartItem = `<dd class="text-right ml-3"> ${productinfo.name} x1 $${productinfo.price}</dd>`
+  totalPrice = totalPrice + Number(productinfo.price);
+  const newSum = `<dd id='sum' class="text-right">$${totalPrice} </dd>`
+  const GST = 5;
+  const PST = 7;
   const checkoutbox = `
   <aside id="checkout-box" class="col-lg-3">
     <div class="card mb-3">
@@ -63,16 +67,23 @@ const cartCheckOut = () => {
     <div class="card">
         <div class="card-body">
             <dl class="dlist-align">
-                <dt>Your items:</dt>
-                <dd class="text-right ml-3">- Add your items here</dd>
+                <dt id='yourItems'>Your items:</dt>
+
             </dl>
             <dl class="dlist-align">
-                <dt>Total price:</dt>
-                <dd class="text-right ml-3">$69.97</dd>
+                <dt id='totalPrice'>Total price: </dt>
+                <dd id='sum' class="text-right"> </dd>
+
+
+
+
             </dl>
             <dl class="dlist-align">
-                <dt>Discount:</dt>
-                <dd class="text-right text-danger ml-3">- $10.00</dd>
+                <dt>PST:</dt>
+                <dd class="text-right text-danger ml-3"> 7.00%</dd>
+                <dl class="dlist-align">
+                <dt>GST:</dt>
+                <dd class="text-right text-danger ml-3">  5.00%</dd>
             </dl>
             <dl class="dlist-align">
                 <dt>Total:</dt>
@@ -87,33 +98,46 @@ const cartCheckOut = () => {
             </div>
         </div>
     </div>
-  </aside>
-`;
-  $(".checkout-side").append(checkoutbox);
+  </aside>`;
+  $("#yourItems").append(newCartItem)
+  $("#sum").replaceWith(newSum);
+  $(".checkout-side").replaceWith(checkoutbox);
+
+  return Number(totalPrice)
 
 };
-cartCheckOut();
 
 
 
 
 $(() => {
+  let totalPrice = 0;
 
   $.get('/orders/menu',(data,status) => {
     //console.log(data[0]);
     renderProducts(data);
-    //cartCheckOut();
+    productdets ={};
+    cartCheckOut(productdets);
+
   }).catch(err => console.log(err));
 
 
 
 
 
-  $(document).on('click','#addtocart',function() {
-    alert("button");
-    console.log('test');
-    console.log(this);
+
+  $(document).on('click','#addtocart',function(){
+    let parent = $(this)
+    let productdets = {
+      name: parent.siblings("#productname").text(),
+      price : parent.siblings("#productprice").text().slice(8)
+    };
+
+    console.log (productdets)
+    totalPrice = cartCheckOut(productdets,totalPrice);
   });
+
+
 
 
 
