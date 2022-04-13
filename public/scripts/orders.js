@@ -156,9 +156,7 @@ $(() => {
     };
 
     totalPrice = (totalPrice -= Number(productdets.price));
-    console.log('productdets',productdets);
-    console.log('price', productdets.price);
-    console.log('totalrpice',totalPrice);
+
 
     const newSumRemove = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
     const PST = (totalPrice * 0.07).toFixed(2);
@@ -170,6 +168,9 @@ $(() => {
     $('#cartTotal').text(`$${cartTotal}`);
 
     $(this).parent().remove();
+    console.log(arr)
+
+    arr.pop(-1);
 
   });
 

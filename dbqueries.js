@@ -89,6 +89,21 @@ const getMenu = function() {
   })
 }
 
+const insertToOrders = function(userID, date, total) {
+  return db
+  .query(`
+    INSERT INTO orders (user_id, address, order_date, total)
+    VALUES ($1,'somewhere in van', $2, $3)
+    RETURNING *;
+  `,[userID,date,total])
+  .then (update => {
+    return update.rows;
+  })
+  .catch (err => {
+    console.log(err.message)
+  })
+}
 
 
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID}
+
+module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID, insertToOrders}
