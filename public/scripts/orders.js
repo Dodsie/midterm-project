@@ -17,10 +17,6 @@ const renderProducts = (data) => {
                     <!-- Product price-->
                     <p id="productprice">Price: $${x.price.toFixed(2)}</p>
                    <br>
-                   <div class="quantity buttons_added">
-                 <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
-                   </div>
-                   <br>
                    <button type='button' id='addtocart' class="btn btn-outline-dark mt-auto" >Add to order</button></div>
               </div>
           </div>

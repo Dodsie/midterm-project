@@ -46,10 +46,16 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     //sendSMS.sendSMS();
     //console.log('this is cookie' ,req.cookies['user'])
-    res.render("product-page")
+    let templateVars = {userID: req.cookies['user']};
+    res.render('product-page', templateVars);
 
   });
 
+  router.get("/about", (req, res) => {
+    //sendSMS.sendSMS();
+    res.render("about");
+
+  });
 
 
 

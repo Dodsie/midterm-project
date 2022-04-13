@@ -94,32 +94,32 @@ const getMenu = function() {
 
 const insertToOrders = function(userID, date, total) {
   return db
-  .query(`
+    .query(`
     INSERT INTO orders (user_id, address, order_date, total)
     VALUES ($1,'somewhere in van', $2, $3) RETURNING *;`,[userID,date,total])
-  .then (update => {
-    console.log('new order #', update.rows[0].id);
-    return update.rows[0].id;
-  })
-  .catch (err => {
-    console.log(err.message)
-  })
-}
+    .then(update => {
+      console.log('new order #', update.rows[0].id);
+      return update.rows[0].id;
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
 
-const insertOrder_Items = function (orderid, menuid) {
-  console.log('orderid',orderid, 'menu id: ',menuid)
+const insertOrder_Items = function(orderid, menuid) {
+  console.log('orderid',orderid, 'menu id: ',menuid);
   return db
-  .query(`
+    .query(`
     INSERT INTO order_items (order_id,menu_items_id)
     VALUES ($1, $2);
   `,[orderid, menuid])
-  .then (result => {
+    .then(result => {
     //console.log('did i make it here?')
-  })
-  .catch (err => {
-    console.log(err.message)
-  })
-}
+    })
+    .catch(err => {
+      console.log(err.message);
+    });
+};
 
 
 
