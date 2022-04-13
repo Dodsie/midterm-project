@@ -28,10 +28,14 @@ const getUserByID = function(id) {
     });
 };
 
-const getPriceByItemID = function(id) {
-  return db.query('SELECT price FROM menu_items WHERE id = $1',[id])
-    .then(price => {
-      return price.rows;
+const getMenuIDFromName = function(itemname) {
+  return db
+    .query(`SELECT menu_items.id
+      FROM menu_items
+      WHERE name = $1
+      `,[itemname])
+    .then(id => {
+      return id.rows[0].id;
     });
 };
 
@@ -51,12 +55,11 @@ const getActiveOrders = function(userID) {
   JOIN menu_items ON menu_items.id = order_items.menu_items_id
   JOIN users ON orders.user_id = users.id
   WHERE users.id = $1 AND active = TRUE
-  GROUP BY orders.id, menu_items.name, menu_items.price
+
   `;
   return db
     .query(queryString,[userID])
     .then(details => {
-    //console.log(details.rows)
       return details.rows;
     }).catch(err => {
       console.log(err.message);
@@ -93,11 +96,25 @@ const insertToOrders = function(userID, date, total) {
   return db
   .query(`
     INSERT INTO orders (user_id, address, order_date, total)
-    VALUES ($1,'somewhere in van', $2, $3)
-    RETURNING *;
-  `,[userID,date,total])
+    VALUES ($1,'somewhere in van', $2, $3) RETURNING *;`,[userID,date,total])
   .then (update => {
-    return update.rows;
+    console.log('new order #', update.rows[0].id);
+    return update.rows[0].id;
+  })
+  .catch (err => {
+    console.log(err.message)
+  })
+}
+
+const insertOrder_Items = function (orderid, menuid) {
+  console.log('orderid',orderid, 'menu id: ',menuid)
+  return db
+  .query(`
+    INSERT INTO order_items (order_id,menu_items_id)
+    VALUES ($1, $2);
+  `,[orderid, menuid])
+  .then (result => {
+    //console.log('did i make it here?')
   })
   .catch (err => {
     console.log(err.message)
@@ -106,4 +123,4 @@ const insertToOrders = function(userID, date, total) {
 
 
 
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID, insertToOrders};
+module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getMenuIDFromName, getOrderByID, insertToOrders, insertOrder_Items};

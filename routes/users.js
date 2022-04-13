@@ -88,14 +88,26 @@ module.exports = (db) => {
     console.log(JSON.parse(req.body.test))
     const result = JSON.parse(req.body.test)
     //db.insert(req.body)
-    const d = new Date();
+    const today = new Date();
+    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+'   '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+    console.log(date)
     const total = Number(result[result.length-1].totalPrice)
-    console.log(typeof total, total)
+    const itemList = result.slice(0,-1)
+    //console.log(typeof total, total)
 
-    db.insertToOrders(req.cookies['user'],d,total)
-    //console.log(req.cookies['user'],d,total.totalPrice)
+    db.insertToOrders(req.cookies['user'],date,total)
+      .then((id) => {
+         for (const item of itemList) {
+          db.getMenuIDFromName(item.name)
+          .then (menuid => {
+            db.insertOrder_Items(id,menuid)
+            .then( data => {console.log('Inserted')})
+          })
+        }
+      }).then (() => {
+          res.redirect(`/users/${req.cookies['user']}/myorders`)
+      })
 
-    //res.redirect(`/users/${req.cookies['user']}/myorders`)
   });
 
   // MY ORDERS PAGE
@@ -109,18 +121,4 @@ module.exports = (db) => {
 };
 
 
- //TESTING
-  // router.get('/:id/getmyorders', (req,res) => {
-  //   Promise.all([db.getActiveOrders(req.params.id),db.getTotalCostByActive(req.params.id)])
-  //     .then(results => {
-  //       let final = results[0];
-  //       for (const item of results[1]) {
-  //         final.push(item)
-  //       }
-  //       res.json(final) //gets all active orders for a user in a array of objs
-  //     }).catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  //   });
+
