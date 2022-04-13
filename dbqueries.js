@@ -60,7 +60,6 @@ const getActiveOrders = function(userID) {
   return db
     .query(queryString,[userID])
     .then(details => {
-      console.log('THIS IS FROM ENTERING MY ORDERS PAGE ',details.rows)
       return details.rows;
     }).catch(err => {
       console.log(err.message);

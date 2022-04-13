@@ -31,7 +31,7 @@ const otherDetails = (template) => {
             <p class="lead fw-bold mb-5" style="color: #f37a27;">Purchase Reciept</p>
             <div class="row">
               <div class="col mb-3">
-                <p id="orderDate" class="small text-muted mb-1">Date</p>
+                <p id="orderDate" class="small text-muted mb-1">Date And Time</p>
                 <p>${template.order_date}</p>
               </div>
               <div class="col mb-3">
@@ -102,7 +102,7 @@ $(() => {
     $.get('/users/getmyorders',(allorderitems) => {
       console.log(allorderitems)
       for (const x of template) {
-        $('#receiptBox').append(otherDetails(x));
+        $('#receiptBox').prepend(otherDetails(x));
         $(`#itemList-${x.id}`).append(orderDetail(x,allorderitems));
         $(`#itemList-${x.id}`).append(addinGSTPST(x));
       }

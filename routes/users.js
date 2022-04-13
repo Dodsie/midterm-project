@@ -88,30 +88,26 @@ module.exports = (db) => {
     console.log(JSON.parse(req.body.test))
     const result = JSON.parse(req.body.test)
     //db.insert(req.body)
-    const d = new Date();
+    const today = new Date();
+    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+'   '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+    console.log(date)
     const total = Number(result[result.length-1].totalPrice)
     const itemList = result.slice(0,-1)
     //console.log(typeof total, total)
 
-    db.insertToOrders(req.cookies['user'],d,total)
+    db.insertToOrders(req.cookies['user'],date,total)
       .then((id) => {
-        //console.log('this is my id in users route', id);
-        //console.log(itemList);
-        //console.log(itemList[0].name)
-        // db.getMenuIDFromName(itemList[0].name)
-        for (const item of itemList) {
-          console.log('item names', item.name)
+         for (const item of itemList) {
           db.getMenuIDFromName(item.name)
           .then (menuid => {
             db.insertOrder_Items(id,menuid)
             .then( data => {console.log('Inserted')})
           })
-
         }
+      }).then (() => {
+          res.redirect(`/users/${req.cookies['user']}/myorders`)
       })
-    //console.log(req.cookies['user'],d,total.totalPrice)
 
-    //res.redirect(`/users/${req.cookies['user']}/myorders`)
   });
 
   // MY ORDERS PAGE
