@@ -93,7 +93,7 @@ module.exports = (db) => {
     //db.insert(req.body)
 
 
-    res.redirect('/users/2/myorders')
+    res.redirect('/users/2/myorders');
 
 
 

@@ -146,19 +146,18 @@ $(() => {
 
 
   $(document).on('click','.delete-button-cart',function() {
-
     let parent =  $(this).parent();
     const child = parent.children(':first-child');
-
+    console.log(child.text().trim().slice(-5));
     let productdets = {
       name: child.text(),
       price : child.text().trim().slice(-5)
     };
 
     totalPrice = (totalPrice -= Number(productdets.price));
-    console.log('productdets',productdets);
-    console.log('price', productdets.price);
-    console.log('totalrpice',totalPrice);
+    // console.log('productdets',productdets);
+    // console.log('price', productdets.price);
+    // console.log('totalrpice',totalPrice);
 
     const newSumRemove = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
     const PST = (totalPrice * 0.07).toFixed(2);
@@ -168,8 +167,13 @@ $(() => {
     $('#GST').text(`$${GST}`);
     $("#sum").replaceWith(newSumRemove);
     $('#cartTotal').text(`$${cartTotal}`);
-
     $(this).parent().remove();
+    const indexOfItemDeleted = arr.findIndex(x => x.price == child.text().trim().slice(-5));
+    arr.splice(indexOfItemDeleted,1);
+
+
+
+    // $(this).parent().remove();
 
   });
 
