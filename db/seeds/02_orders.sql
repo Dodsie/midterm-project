@@ -11,8 +11,8 @@ INSERT INTO orders (user_id, address, order_date, total)
 VALUES (2,'somewhere in van', '2022-11-22 4:44:12', '2.24');
 
 -- new order by new user
-INSERT INTO orders (user_id, address, order_date, total)
-VALUES (3,'somewhere in van', '2022-12-1 7:7:11', '22.4');
+INSERT INTO orders (user_id, address, order_date, total, active)
+VALUES (3,'somewhere in van', '2022-12-1 7:7:11', '22.4', FALSE);
 
 
 

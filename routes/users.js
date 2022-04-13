@@ -29,8 +29,12 @@ module.exports = (db) => {
   router.get('/activeTotals', (req,res) => {
     db.getTotalCostByUser(req.cookies['user'])
       .then(results => {
+<<<<<<< HEAD
         res.json(results); //gets all active orders for a user in a array of objs
 
+=======
+        res.json(results) //gets all active orders for a user in a array of objs
+>>>>>>> 4d49b8df7387c43c51799693d28c961a226124d4
       }).catch(err => {
         res
           .status(500)
@@ -38,8 +42,41 @@ module.exports = (db) => {
       });
   });
 
+    //for AJAX to get all Active Orders for Admin
+    router.get('/checkadmin', (req,res) => {
+      db.checkAdmin(req.cookies['user'])
+        .then (admin => {
+          res.send(admin[0].admin)
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    })
+
+    router.get('/getAllActiveTotalsForAdmin', (req,res) => {
+      db.getAllActiveTotalsForAdmin()
+        .then (result => {
+          console.log(result)
+          res.json(result)
+        })
+    });
+
+    router.get('/getAllActiveOrdersForAdmin', (req,res) => {
+      db.getAllActiveOrdersForAdmin()
+        .then (result => {
+          console.log(result)
+          res.json(result)
+        })
+    })
 
 
+
+
+
+
+<<<<<<< HEAD
   router.get("/", (req, res) => {
     db.getUsers()
       .then(data => {
@@ -52,6 +89,8 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+=======
+>>>>>>> 4d49b8df7387c43c51799693d28c961a226124d4
 
 
 
@@ -67,6 +106,7 @@ module.exports = (db) => {
 
 
 
+<<<<<<< HEAD
   router.get("/:id", (req, res) => {
     db.getUserByID(req.cookies['user'])
       .then(data => {
@@ -78,12 +118,16 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+=======
+
+>>>>>>> 4d49b8df7387c43c51799693d28c961a226124d4
 
   router.post('/test', (req,res) => {
     if (!req.body) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;
     }
+<<<<<<< HEAD
     //console.log(JSON.parse(req.body))
     console.log(JSON.parse(req.body.test));
     const result = JSON.parse(req.body.test);
@@ -95,6 +139,15 @@ module.exports = (db) => {
     const itemList = result.slice(0,-1);
     //console.log(typeof total, total)
 
+=======
+    console.log(JSON.parse(req.body.test))
+    const result = JSON.parse(req.body.test)
+    const today = new Date();
+    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+'   '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+    console.log(date)
+    const total = Number(result[result.length-1].totalPrice)
+    const itemList = result.slice(0,-1)
+>>>>>>> 4d49b8df7387c43c51799693d28c961a226124d4
     db.insertToOrders(req.cookies['user'],date,total)
       .then((id) => {
         for (const item of itemList) {
@@ -106,17 +159,72 @@ module.exports = (db) => {
                 });
             });
         }
+<<<<<<< HEAD
       }).then(() => {
         res.redirect(`/users/${req.cookies['user']}/myorders`);
       });
-
+=======
+      }).then (() => {
+          res.redirect(`/users/${req.cookies['user']}/myorders`)
+      })
   });
+>>>>>>> 4d49b8df7387c43c51799693d28c961a226124d4
+
+  //Update an ORDER to active = false upon click of button
+  router.post('/updateOrder', (req,res) => {
+    if (!req.body) {
+      res.status(400).json({ error: 'invalid request: no data in POST body'});
+      return;
+    }
+    console.log(typeof req.body.orderid)
+    db.updateOrderStatus(req.body.orderid)
+      .then(()=>{
+        console.log('status updated')
+        res.redirect(`/users/${req.cookies['user']}/myorders`)
+      })
+  });
+
+
+
+
+
+
 
   // MY ORDERS PAGE
   router.get('/:id/myorders', (req,res) => {
     let templateVars = {userID: req.cookies['user']};
     res.render("myOrders", templateVars);
   });
+
+
+
+
+  router.get("/:id", (req, res) => {
+    db.getUserByID(req.cookies['user'])
+     .then(data => {
+       res.json( data[0] );
+     })
+     .catch(err => {
+       res
+         .status(500)
+         .json({ error: err.message });
+     });
+ });
+
+  router.get("/", (req, res) => {
+    db.getUsers()
+      .then(data => {
+        const users = data.rows;
+        res.json( {users} );
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+
 
 
 
