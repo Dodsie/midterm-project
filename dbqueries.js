@@ -81,14 +81,14 @@ const getTotalCostByUser = function(userID) {
 
 const getMenu = function() {
   return db
-  .query(`SELECT name, price, photo, description FROM menu_items`)
-  .then(menu => {
-    return menu.rows
-  }).catch (err => {
-    console.log(err.message)
-  })
-}
+    .query(`SELECT name, price, photo, description FROM menu_items`)
+    .then(menu => {
+      return menu.rows;
+    }).catch(err => {
+      console.log(err.message);
+    });
+};
 
 
 
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID}
+module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID};
