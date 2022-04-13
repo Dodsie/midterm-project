@@ -116,7 +116,7 @@ const cartCheckOut = (productinfo,totalPrice) => {
 
 $(() => {
   let totalPrice = 0;
-  let arr =[];
+  let arr = [];
 
   $.get('/orders/menu',(data,status) => {
     //console.log(data[0]);
@@ -129,7 +129,7 @@ $(() => {
 
 
   $(document).on('click','#addtocart',function() {
-    let parent = $(this)
+    let parent = $(this);
     let productdets = {
       name: parent.siblings("#productname").text(),
       price : parent.siblings("#productprice").text().slice(8)
@@ -140,7 +140,7 @@ $(() => {
     arr.push({
       name:parent.siblings("#productname").text(),
       price: parent.siblings("#productprice").text().slice(8)
-    })
+    });
   });
 
 
@@ -156,9 +156,9 @@ $(() => {
     };
 
     totalPrice = (totalPrice -= Number(productdets.price));
-    console.log('productdets',productdets)
-    console.log('price', productdets.price)
-    console.log('totalrpice',totalPrice)
+    console.log('productdets',productdets);
+    console.log('price', productdets.price);
+    console.log('totalrpice',totalPrice);
 
     const newSumRemove = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
     const PST = (totalPrice * 0.07).toFixed(2);
@@ -175,19 +175,19 @@ $(() => {
 
   $(document).on('submit','#testform',function(event) {
     event.preventDefault();
-    console.log('clicked')
-    arr.push({totalPrice:(totalPrice*1.12).toFixed(2)})
-    const stringarr = (JSON.stringify(arr))
+    console.log('clicked');
+    arr.push({totalPrice:(totalPrice * 1.12).toFixed(2)});
+    const stringarr = (JSON.stringify(arr));
     $.ajax({
       url: '/users/test',
       type: 'POST',
       data: {test:stringarr}
-    }).then (data => {
-      window.location.replace('/users/2/myorders')
+    }).then(data => {
+      window.location.replace('/users/2/myorders');
 
-    })
+    });
 
-  })
+  });
 
 });
 

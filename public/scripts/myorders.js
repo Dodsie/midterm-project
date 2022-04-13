@@ -65,34 +65,7 @@ const otherDetails = (template,data) => {
   return receipt;
 };
 
-const addinGSTPST = (x) => {
-  const GST = (x.total * 0.05).toFixed(2);
-  const PST = (x.total * 0.07).toFixed(2);
-  let taxes = `
-        <div class="row">
-          <div class="col-md-8 col-lg-9">
-            <p>GST (5.00%)</p>
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <p> $${GST} </p>
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-8 col-lg-9">
-            <p>PST (7.00%)</p>
-          </div>
-          <div class="col-md-4 col-lg-3">
-            <p> $${PST} </p>
-          </div>
-        </div>
-        `;
-  return taxes;
-
-};
-    `
-  return receipt
-};
 
 const addinGSTPST = (x) => {
   const GST = (x.total * 0.05).toFixed(2)
@@ -117,8 +90,7 @@ const addinGSTPST = (x) => {
         </div>
         `;
   return taxes;
-
-}
+};
 
 
 
@@ -133,12 +105,5 @@ $(() => {
       }
     }).catch(err => console.log(err));
   });
-        $('#receiptBox').append(otherDetails(x))
-        $(`#itemList-${x.id}`).append(orderDetail(x,data))
-        $(`#itemList-${x.id}`).append(addinGSTPST(x))
-      }
-    }).catch(err => console.log(err));
-  })
 });
-
 
