@@ -32,7 +32,7 @@ $(() => {
   });
 
 // Nav bar Cart button redirects to /orders
-  $('.d-flex').on('click', function(event) {
+  $('#cart-button').on('click', function(event) {
     event.preventDefault();
     window.location.href="/orders";
   });
