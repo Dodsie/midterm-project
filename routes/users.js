@@ -90,9 +90,25 @@ module.exports = (db) => {
     //db.insert(req.body)
     const d = new Date();
     const total = Number(result[result.length-1].totalPrice)
-    console.log(typeof total, total)
+    const itemList = result.slice(0,-1)
+    //console.log(typeof total, total)
 
     db.insertToOrders(req.cookies['user'],d,total)
+      .then((id) => {
+        //console.log('this is my id in users route', id);
+        //console.log(itemList);
+        //console.log(itemList[0].name)
+        // db.getMenuIDFromName(itemList[0].name)
+        for (const item of itemList) {
+          console.log('item names', item.name)
+          db.getMenuIDFromName(item.name)
+          .then (menuid => {
+            db.insertOrder_Items(id,menuid)
+            .then( data => {console.log('Inserted')})
+          })
+
+        }
+      })
     //console.log(req.cookies['user'],d,total.totalPrice)
 
     //res.redirect(`/users/${req.cookies['user']}/myorders`)
@@ -109,18 +125,4 @@ module.exports = (db) => {
 };
 
 
- //TESTING
-  // router.get('/:id/getmyorders', (req,res) => {
-  //   Promise.all([db.getActiveOrders(req.params.id),db.getTotalCostByActive(req.params.id)])
-  //     .then(results => {
-  //       let final = results[0];
-  //       for (const item of results[1]) {
-  //         final.push(item)
-  //       }
-  //       res.json(final) //gets all active orders for a user in a array of objs
-  //     }).catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  //   });
+

@@ -1,4 +1,5 @@
 const orderDetail = (x, data) => {
+
   let orderBox;
   let result = [];
   for (const item of data) {
@@ -20,8 +21,8 @@ const orderDetail = (x, data) => {
 };
 
 
-const otherDetails = (template,data) => {
-  const total = (template.total * 1.12).toFixed(2);
+const otherDetails = (template) => {
+  const total = (template.total);
   const receipt = `
 
       <div class="col-lg-8 col-xl-6">
@@ -94,12 +95,15 @@ const addinGSTPST = (x) => {
 
 
 $(() => {
-  $.get('/users/activeTotals', (data,status) => {
+  $.get('/users/activeTotals', (orderSummary) => {
+    //console.log(orderSummary)
   }).then((template) => {
-    $.get('/users/getmyorders',(data,status) => {
+    //console.log(template)
+    $.get('/users/getmyorders',(allorderitems) => {
+      console.log(allorderitems)
       for (const x of template) {
         $('#receiptBox').append(otherDetails(x));
-        $(`#itemList-${x.id}`).append(orderDetail(x,data));
+        $(`#itemList-${x.id}`).append(orderDetail(x,allorderitems));
         $(`#itemList-${x.id}`).append(addinGSTPST(x));
       }
     }).catch(err => console.log(err));
