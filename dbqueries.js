@@ -35,7 +35,7 @@ const getPriceByItemID = function(id) {
     });
 };
 
-const getNameByItemID = function(id) {
+const getOrderByID = function(orderID) {
   let info = [];
   return db.query('SELECT name FROM menu_items WHERE id = $1',[id])
     .then(name => {
@@ -65,7 +65,7 @@ const getActiveOrders = function(userID) {
 
 const getTotalCostByUser = function(userID) {
   const queryString = `
-  SELECT orders.id, total, users.name
+  SELECT orders.id, total, users.name, orders.order_date
   FROM orders JOIN users on users.id = orders.user_id
   WHERE active=TRUE AND users.id = $1
   GROUP by orders.id, users.name
@@ -73,7 +73,6 @@ const getTotalCostByUser = function(userID) {
   return db
     .query(queryString,[userID])
     .then(totalcost => {
-      console.log(totalcost.rows);
       return totalcost.rows;
     }).catch(err => {
       console.log(err.message);
@@ -92,4 +91,4 @@ const getMenu = function() {
 
 
 
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID}
+module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID}
