@@ -1,0 +1,36 @@
+﻿* SINGLE RESTAURANT 
+* SELECT ONE OR MORE DISHES FOR PICK UP 
+* RECEIVE NOTIFICATION WHEN ORDER IS READY 
+* RESTAURANT AND CLIENT BOTH NOTIFIED 
+* WHEN ORDER IS PLACED RESTAURANT RECEIVES THE ORDER SMS
+* THE RESTAURANT CAN SPECIFY HOW LONG IT WILL TAKE TO FULFILL
+
+
+—----------------------------------------------------------------------------------------------------------------------------
+
+
+As a ___, I want to __, because ___.
+As a customer, I want to order 1 or more items, because I am hungry.
+As the owner, I want to check active orders, because I need to know.
+As the user, I want to see all menu items, because I need to know.
+As the user , I want to see contact information for the restaurant because what if I need to call.
+As the user, I want to see the address of the restaurant because I need to know where they are located.
+As the user I want to see when to pick up my order because I do not want to be waiting.
+As the user I want to know the total prior to pickup because I need to know how much money to have.
+As the user I need to know my order id upon pickup because the restaurant may have multiple orders.
+As the users I want to see my current orders because I want to have reference to my order.
+As the user I want to see photos of the food I am ordering because 
+As a user i want to delete or edit items from my cart because i made a mistake
+As a user I want to know the restaurant hours of operation.
+As the owner I want to send a pickup time to the orderer
+—--------------------------------------------------------------------------------------------------------------------------
+As a ___, I shouldn’t be able to __, because ___.
+As a customer, I shouldn’t be able to specify how long it will take to fulfill because I do not know.
+As a customer, I can’t edit my order after it’s been placed because it will be in the preparation process.
+
+
+EXTRA FEATURES —------------------------------------------------------------------------------------------------
+As the owner, I want to check all completed Orders because I need to know.
+As the user, I want to see my order history.
+As the user, I want to chat to a help desk because there was an issue with my order.
+As the owner, I want to edit menu items because menu has changed.
