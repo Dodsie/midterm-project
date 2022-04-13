@@ -49,6 +49,11 @@ module.exports = (db) => {
 
   });
 
+  router.get("/about", (req, res) => {
+    //sendSMS.sendSMS();
+    res.render("about");
+
+  });
 
 
 
