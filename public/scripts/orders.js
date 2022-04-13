@@ -155,9 +155,6 @@ $(() => {
     };
 
     totalPrice = (totalPrice -= Number(productdets.price));
-    // console.log('productdets',productdets);
-    // console.log('price', productdets.price);
-    // console.log('totalrpice',totalPrice);
 
     const newSumRemove = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
     const PST = (totalPrice * 0.07).toFixed(2);
@@ -172,12 +169,7 @@ $(() => {
     arr.splice(indexOfItemDeleted,1);
 
 
-
-    // $(this).parent().remove();
-
   });
-<<<<<<< HEAD
-=======
 
   $(document).on('submit','#testform',function(event) {
     event.preventDefault();
@@ -190,11 +182,9 @@ $(() => {
       data: {test:stringarr}
     }).then(data => {
       window.location.replace('/users/2/myorders');
-
     });
 
   });
->>>>>>> e699577d780412305419c593da61edb7df51db88
 
 });
 
