@@ -1,5 +1,4 @@
 // Client facing scripts here
-
 const renderProducts = (data) => {
   const res = [];
   for (const x of data) {
@@ -44,9 +43,12 @@ const renderProducts = (data) => {
 
 
 const cartCheckOut = (productinfo,totalPrice) => {
-  const newCartItem = `<dd STYLE="font-weight: 400" class="text-right ml-3"> ${productinfo.name} x1 $${productinfo.price}</dd>`
+  const newCartItem = `<div class="delete-button">
+  <dd id="items-in-cart" STYLE="font-weight: 400" class="text-right ml-3"> ${productinfo.name} x1 $${productinfo.price}</dd>
+  <button class="delete-button-cart"><i class="fa-solid fa-square-minus"></i></button>
+  </div>`;
   totalPrice = totalPrice + Number(productinfo.price);
-  const newSum = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`
+  const newSum = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
 
   const checkoutbox = `
   <aside id="checkout-box" class="col-lg-3">
@@ -81,7 +83,7 @@ const cartCheckOut = (productinfo,totalPrice) => {
             </dl>
             <dl class="dlist-align">
                 <dt>Total:</dt>
-                <dd id='cartTotal' class="text-right text-dark b ml-3"><strong>$59.97</strong></dd>
+                <dd id='cartTotal' class="text-right text-dark b ml-3"><strong>$0.00</strong></dd>
             </dl>
             <hr>
             <div class="cart-buttons">
@@ -97,17 +99,17 @@ const cartCheckOut = (productinfo,totalPrice) => {
         </div>
     </div>
   </aside>`;
-  const PST = (totalPrice*0.07).toFixed(2)
-  const GST = (totalPrice*0.05).toFixed(2)
-  const cartTotal = (Number(PST) + Number(GST) + totalPrice).toFixed(2)
-  $('#PST').text(`$${PST}`)
-  $('#GST').text(`$${GST}`)
-  $("#yourItems").append(newCartItem)
+  const PST = (totalPrice * 0.07).toFixed(2);
+  const GST = (totalPrice * 0.05).toFixed(2);
+  const cartTotal = (Number(PST) + Number(GST) + totalPrice).toFixed(2);
+  $('#PST').text(`$${PST}`);
+  $('#GST').text(`$${GST}`);
+  $("#yourItems").append(newCartItem);
   $("#sum").replaceWith(newSum);
-  $('#cartTotal').text(`$${cartTotal}`)
+  $('#cartTotal').text(`$${cartTotal}`);
   $(".checkout-side").replaceWith(checkoutbox);
 
-  return Number(totalPrice)
+  return Number(totalPrice);
 
 };
 
@@ -119,18 +121,21 @@ $(() => {
   $.get('/orders/menu',(data,status) => {
     //console.log(data[0]);
     renderProducts(data);
-    productdets ={};
+    productdets = {};
     cartCheckOut(productdets);
 
   }).catch(err => console.log(err));
 
-  $(document).on('click','#addtocart',function(){
 
-    let parent = $(this)
+
+  $(document).on('click','#addtocart',function() {
+    let parent = $(this);
     let productdets = {
       name: parent.siblings("#productname").text(),
       price : parent.siblings("#productprice").text().slice(8)
     };
+
+    console.log(productdets);
     totalPrice = cartCheckOut(productdets,totalPrice);
     arr.push({
       name:parent.siblings("#productname").text(),
@@ -138,21 +143,35 @@ $(() => {
     })
   });
 
-  $(document).on('submit','#testform',function(event) {
-    event.preventDefault();
-    console.log('clicked')
-    arr.push({totalPrice:(totalPrice*1.12).toFixed(2)})
-    const stringarr = (JSON.stringify(arr))
-    $.ajax({
-      url: '/users/test',
-      type: 'POST',
-      data: {test:stringarr}
-    }).then (data => {
-      window.location.replace('/users/2/myorders')
 
-    })
 
-  })
+  $(document).on('click','.delete-button-cart',function() {
+
+    let parent =  $(this).parent();
+    const child = parent.children(':first-child');
+
+    let productdets = {
+      name: child.text(),
+      price : child.text().trim().slice(-5)
+    };
+
+    totalPrice = (totalPrice -= Number(productdets.price));
+    console.log('productdets',productdets)
+    console.log('price', productdets.price)
+    console.log('totalrpice',totalPrice)
+
+    const newSumRemove = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
+    const PST = (totalPrice * 0.07).toFixed(2);
+    const GST = (totalPrice * 0.05).toFixed(2);
+    const cartTotal = (Number(PST) + Number(GST) + totalPrice).toFixed(2);
+    $('#PST').text(`$${PST}`);
+    $('#GST').text(`$${GST}`);
+    $("#sum").replaceWith(newSumRemove);
+    $('#cartTotal').text(`$${cartTotal}`);
+
+    $(this).parent().remove();
+
+  });
 
 });
 
