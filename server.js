@@ -60,7 +60,8 @@ app.use("/orders", ordersRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  let templateVars = {userID: req.cookies['user']};
+  res.render("index", templateVars);
   //console.log(process.env)
 });
 
