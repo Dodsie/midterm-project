@@ -1,6 +1,8 @@
 // load .env data into process.env
 require("dotenv").config();
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
+
 
 //require DB setup
 // const { Pool } = require("pg");
@@ -22,6 +24,7 @@ const morgan = require("morgan");
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.set("view engine", "ejs");
@@ -59,7 +62,7 @@ app.use("/orders", ordersRoutes(db));
 
 app.get("/", (req, res) => {
   res.render("index");
-  console.log(process.env)
+  //console.log(process.env)
 });
 
 app.listen(PORT, () => {
