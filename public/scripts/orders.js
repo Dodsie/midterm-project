@@ -84,7 +84,7 @@ const cartCheckOut = (productinfo,totalPrice) => {
             </dl>
             <dl class="dlist-align">
                 <dt>Total:</dt>
-                <dd id='cartTotal' class="text-right text-dark b ml-3"><strong>$59.97</strong></dd>
+                <dd id='cartTotal' class="text-right text-dark b ml-3"><strong>$0.00</strong></dd>
             </dl>
             <hr>
             <div class="cart-buttons">
@@ -137,23 +137,35 @@ $(() => {
     totalPrice = cartCheckOut(productdets,totalPrice);
   });
 
+
+
   $(document).on('click','.delete-button-cart',function() {
-    const newSum1 = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
+
+    let parent =  $(this).parent();
+    const child = parent.children(':first-child');
+
+    let productdets = {
+      name: child.text(),
+      price : child.text().trim().slice(-5)
+    };
+
+    totalPrice = (totalPrice -= Number(productdets.price));
+    console.log('productdets',productdets)
+    console.log('price', productdets.price)
+    console.log('totalrpice',totalPrice)
+
+    const newSumRemove = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
+    const PST = (totalPrice * 0.07).toFixed(2);
+    const GST = (totalPrice * 0.05).toFixed(2);
+    const cartTotal = (Number(PST) + Number(GST) + totalPrice).toFixed(2);
+    $('#PST').text(`$${PST}`);
+    $('#GST').text(`$${GST}`);
+    $("#sum").replaceWith(newSumRemove);
+    $('#cartTotal').text(`$${cartTotal}`);
+
     $(this).parent().remove();
 
-    let parent = $($(this));
-    let productdets = {
-      name: parent.siblings("#productname").text(),
-      price : parent.siblings("#productprice").text().slice(8)
-    };
-    totalPrice = (totalPrice -= Number(productdets.price));
-    console.log(totalPrice);
-    $('#sum').replaceWith(newSum1);
-    console.log(typeof totalPrice);
   });
-
-
-
 
 });
 
