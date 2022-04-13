@@ -155,9 +155,6 @@ $(() => {
     };
 
     totalPrice = (totalPrice -= Number(productdets.price));
-    // console.log('productdets',productdets);
-    // console.log('price', productdets.price);
-    // console.log('totalrpice',totalPrice);
 
     const newSumRemove = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
     const PST = (totalPrice * 0.07).toFixed(2);
@@ -172,9 +169,6 @@ $(() => {
     arr.splice(indexOfItemDeleted,1);
 
 
-
-    // $(this).parent().remove();
-
   });
 
   $(document).on('submit','#testform',function(event) {
@@ -188,7 +182,6 @@ $(() => {
       data: {test:stringarr}
     }).then(data => {
       window.location.replace('/users/2/myorders');
-
     });
 
   });
