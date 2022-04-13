@@ -183,7 +183,6 @@ $(() => {
     }).then(data => {
       window.location.replace('/users/2/myorders');
     });
-
   });
 
 });

@@ -166,6 +166,15 @@ const checkAdmin = function(userid) {
     })
 }
 
+const updateOrderStatus = function(orderid) {
+  return db
+    .query(`
+      UPDATE orders
+      SET active = FALSE
+      WHERE id = $1;
+    `,[orderid])
+}
 
 
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getMenuIDFromName, getOrderByID, insertToOrders, insertOrder_Items, getAllActiveOrdersForAdmin, getAllActiveTotalsForAdmin, checkAdmin};
+
+module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getMenuIDFromName, getOrderByID, insertToOrders, insertOrder_Items, getAllActiveOrdersForAdmin, getAllActiveTotalsForAdmin, checkAdmin, updateOrderStatus};

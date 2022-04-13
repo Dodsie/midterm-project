@@ -93,17 +93,13 @@ module.exports = (db) => {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
       return;
     }
-    //console.log(JSON.parse(req.body))
     console.log(JSON.parse(req.body.test))
     const result = JSON.parse(req.body.test)
-    //db.insert(req.body)
     const today = new Date();
     const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+'   '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
     console.log(date)
     const total = Number(result[result.length-1].totalPrice)
     const itemList = result.slice(0,-1)
-    //console.log(typeof total, total)
-
     db.insertToOrders(req.cookies['user'],date,total)
       .then((id) => {
          for (const item of itemList) {
@@ -116,8 +112,27 @@ module.exports = (db) => {
       }).then (() => {
           res.redirect(`/users/${req.cookies['user']}/myorders`)
       })
-
   });
+
+  //Update an ORDER to active = false upon click of button
+  router.post('/updateOrder', (req,res) => {
+    if (!req.body) {
+      res.status(400).json({ error: 'invalid request: no data in POST body'});
+      return;
+    }
+    console.log(typeof req.body.orderid)
+    db.updateOrderStatus(req.body.orderid)
+      .then(()=>{
+        console.log('status updated')
+        res.redirect(`/users/${req.cookies['user']}/myorders`)
+      })
+  });
+
+
+
+
+
+
 
   // MY ORDERS PAGE
   router.get('/:id/myorders', (req,res) => {

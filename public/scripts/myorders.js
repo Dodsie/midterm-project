@@ -60,8 +60,8 @@ const otherDetails = (template,admin) => {
                   <p>${template.order_date}</p>
                 </div>
                 <div class="col mb-3">
-                  <p id="orderNo" class="small text-muted mb-1">Order No.</p>
-                  <p>${template.id}</p>
+                  <p class="small text-muted mb-1">Order No.</p>
+                  <p id="orderNo">${template.id}</p>
                 </div>
                 <div class="col mb-3">
                   <p id="orderDate" class="small text-muted mb-1">Customer Name</p>
@@ -80,7 +80,10 @@ const otherDetails = (template,admin) => {
               </div>
               <div class="row my-4">
                 <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
-                  <button id='complete'>Complete</button>
+                  <form id='testform' method="POST" action="/users/orderUpdate"/>
+                  <dd id='testtext' type='text' name='randomtext'></dd>
+                  <button type="submit" class="btn btn-out btn-primary btn-square btn-main" id="place-order">Complete</button>
+                </form>
                 </div>
               </div>
               <div class="row">
@@ -108,14 +111,19 @@ const otherDetails = (template,admin) => {
                   <p>${template.order_date}</p>
                 </div>
                 <div class="col mb-3">
-                  <p id="orderNo" class="small text-muted mb-1">Order No.</p>
-                  <p>${template.id}</p>
+                  <p class="small text-muted mb-1">Order No.</p>
+                  <p id="orderNo" >${template.id}</p>
+                </div>
+                <div class="col mb-3">
+                  <p id="orderDate" class="small text-muted mb-1">ETA</p>
+                  <p id="ETA"> N/A</p>
                 </div>
               </div>
 
               <div id="itemList-${template.id}" class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
 
               </div>
+
 
               <div class="row my-4">
                 <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
@@ -200,16 +208,24 @@ $(() => {
         }).catch(err => console.log(err));
       });
     }
-  })
+  });
+
+  $(document).on('submit','#testform',function(event) {
+    event.preventDefault();
+    console.log('clicked');
+    const ordernumber = $('#orderNo').text()
+    console.log(ordernumber)
+    alert(`Order Number ${ordernumber} Completed!`)
 
 
-
-
-
-
-
-
-
+    $.ajax({
+      url: '/users/updateOrder',
+      type: 'POST',
+      data: {orderid: ordernumber}
+    }).then(() => {
+      window.location.replace('/users/1/myorders');
+    })
+   });
 
 });
 
