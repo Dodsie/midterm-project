@@ -116,7 +116,7 @@ const cartCheckOut = (productinfo,totalPrice) => {
 
 $(() => {
   let totalPrice = 0;
-  let arr =[];
+  let arr = [];
 
   $.get('/orders/menu',(data,status) => {
     //console.log(data[0]);
@@ -140,25 +140,24 @@ $(() => {
     arr.push({
       name:parent.siblings("#productname").text(),
       price: parent.siblings("#productprice").text().slice(8)
-    })
+    });
   });
 
 
 
   $(document).on('click','.delete-button-cart',function() {
-
     let parent =  $(this).parent();
     const child = parent.children(':first-child');
-
+    console.log(child.text().trim().slice(-5));
     let productdets = {
       name: child.text(),
       price : child.text().trim().slice(-5)
     };
 
     totalPrice = (totalPrice -= Number(productdets.price));
-    console.log('productdets',productdets)
-    console.log('price', productdets.price)
-    console.log('totalrpice',totalPrice)
+    // console.log('productdets',productdets);
+    // console.log('price', productdets.price);
+    // console.log('totalrpice',totalPrice);
 
     const newSumRemove = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
     const PST = (totalPrice * 0.07).toFixed(2);
@@ -168,10 +167,34 @@ $(() => {
     $('#GST').text(`$${GST}`);
     $("#sum").replaceWith(newSumRemove);
     $('#cartTotal').text(`$${cartTotal}`);
-
     $(this).parent().remove();
+    const indexOfItemDeleted = arr.findIndex(x => x.price == child.text().trim().slice(-5));
+    arr.splice(indexOfItemDeleted,1);
+
+
+
+    // $(this).parent().remove();
 
   });
+<<<<<<< HEAD
+=======
+
+  $(document).on('submit','#testform',function(event) {
+    event.preventDefault();
+    console.log('clicked');
+    arr.push({totalPrice:(totalPrice * 1.12).toFixed(2)});
+    const stringarr = (JSON.stringify(arr));
+    $.ajax({
+      url: '/users/test',
+      type: 'POST',
+      data: {test:stringarr}
+    }).then(data => {
+      window.location.replace('/users/2/myorders');
+
+    });
+
+  });
+>>>>>>> e699577d780412305419c593da61edb7df51db88
 
 });
 

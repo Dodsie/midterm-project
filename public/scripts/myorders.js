@@ -1,8 +1,8 @@
 const orderDetail = (x, data) => {
   let orderBox;
-  let result =[];
+  let result = [];
   for (const item of data) {
-    if(item.order_number === x.id)  {
+    if (item.order_number === x.id)  {
       orderBox = `
         <div class="row">
           <div id='allNames' class="col-md-8 col-lg-9">
@@ -13,7 +13,7 @@ const orderDetail = (x, data) => {
           </div>
         </div>
         `;
-        result.push(orderBox)
+      result.push(orderBox);
     }
   }
   return result;
@@ -21,8 +21,8 @@ const orderDetail = (x, data) => {
 
 
 const otherDetails = (template,data) => {
-    const total = (template.total*1.12).toFixed(2);
-    const receipt = `
+  const total = (template.total * 1.12).toFixed(2);
+  const receipt = `
 
       <div class="col-lg-8 col-xl-6">
         <div id="my-orders-box" class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
@@ -60,9 +60,11 @@ const otherDetails = (template,data) => {
 
         </div>
       </div>
-    `
-  return receipt
+    `;
+  return receipt;
 };
+
+
 
 const addinGSTPST = (x) => {
   const GST = (x.total * 0.05).toFixed(2)
@@ -87,8 +89,7 @@ const addinGSTPST = (x) => {
         </div>
         `;
   return taxes;
-
-}
+};
 
 
 
@@ -97,12 +98,11 @@ $(() => {
   }).then((template) => {
     $.get('/users/getmyorders',(data,status) => {
       for (const x of template) {
-        $('#receiptBox').append(otherDetails(x))
-        $(`#itemList-${x.id}`).append(orderDetail(x,data))
-        $(`#itemList-${x.id}`).append(addinGSTPST(x))
+        $('#receiptBox').append(otherDetails(x));
+        $(`#itemList-${x.id}`).append(orderDetail(x,data));
+        $(`#itemList-${x.id}`).append(addinGSTPST(x));
       }
     }).catch(err => console.log(err));
-  })
+  });
 });
-
 
