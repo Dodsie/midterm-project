@@ -11,6 +11,47 @@ const router  = express.Router();
 
 
 module.exports = (db) => {
+
+
+    //for AJAX to get DB INFO
+    router.get('/getmyorders', (req,res) => {
+      db.getActiveOrders(req.cookies['user'])
+      .then(results => {
+        res.json(results) //gets all active orders for a user in a array of objs
+      }).catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    });
+
+    //for AJAX to get DB INFO
+    router.get('/activeTotals', (req,res) => {
+      db.getTotalCostByUser(req.cookies['user'])
+      .then(results => {
+        res.json(results) //gets all active orders for a user in a array of objs
+
+      }).catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    });
+
+    router.get('/hello', (req,res) => {
+      db.getTotalCostByUser(req.cookies['user'])
+        .then (result => {
+          res.json('done')
+        })
+    })
+
+
+    // MY ORDERS PAGE
+    router.get('/:id/myorders', (req,res) => {
+      res.render("myOrders")
+      });
+
+
   router.get("/", (req, res) => {
     db.getUsers()
       .then(data => {
@@ -24,20 +65,22 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/:id/del", (req, res) => {
-    res.clearCookie(req.params.id);
+
+
+  router.get("/del", (req, res) => {
+    res.clearCookie('user');
     res.send('cookies cleared.')
   })
 
   router.get('/:id/login', (req,res) => {
-    res.cookie(req.params.id,req.params.id);
+    res.cookie('user',req.params.id);
     res.send('logged in')
   })
 
 
 
   router.get("/:id", (req, res) => {
-    db.getUserByID(req.cookies.testaccount)
+     db.getUserByID(req.cookies['user'])
       .then(data => {
         res.json( data[0] );
       })
@@ -47,45 +90,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
-
-    //for AJAX to get DB INFO
-    router.get('/:id/getmyorders', (req,res) => {
-      console.log(req.cookies.testaccount)
-      db.getActiveOrders(req.params.id)
-      .then(results => {
-        res.json(results) //gets all active orders for a user in a array of objs
-      }).catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-    });
-
-    //for AJAX to get DB INFO
-    router.get('/:id/activeTotals', (req,res) => {
-      db.getTotalCostByUser(req.params.id)
-      .then(results => {
-        res.json(results) //gets all active orders for a user in a array of objs
-
-      }).catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-    });
-
-
-
-
-
-
-
-    // MY ORDERS PAGE
-    router.get('/:id/myorders', (req,res) => {
-      res.render("myOrders")
-
-      });
-
 
 
   return router;

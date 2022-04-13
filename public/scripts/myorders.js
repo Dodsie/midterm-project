@@ -94,9 +94,9 @@ const addinGSTPST = (x) => {
 
 
 $(() => {
-  $.get('/users/2/activeTotals', (data,status) => {
+  $.get('/users/activeTotals', (data,status) => {
   }).then((template) => {
-    $.get('/users/2/getmyorders',(data,status) => {
+    $.get('/users/getmyorders',(data,status) => {
       for (const x of template) {
         $('#receiptBox').append(otherDetails(x))
         $(`#itemList-${x.id}`).append(orderDetail(x,data))
