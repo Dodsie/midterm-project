@@ -96,8 +96,6 @@ module.exports = (db) => {
     res.redirect('/users/2/myorders');
 
 
-
-
   })
 
 

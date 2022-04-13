@@ -148,7 +148,7 @@ $(() => {
   $(document).on('click','.delete-button-cart',function() {
     let parent =  $(this).parent();
     const child = parent.children(':first-child');
-    console.log(child.text().trim().slice(-5));
+
     let productdets = {
       name: child.text(),
       price : child.text().trim().slice(-5)
