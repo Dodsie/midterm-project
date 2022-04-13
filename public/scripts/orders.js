@@ -60,6 +60,7 @@ const cartCheckOut = (productinfo,totalPrice) => {
         </div>
     </div>
     <div class="card">
+
         <div class="card-body">
             <dl class="dlist-align">
                 <dt id='yourItems'>Your items:</dt>
@@ -68,8 +69,6 @@ const cartCheckOut = (productinfo,totalPrice) => {
             <dl class="dlist-align">
                 <dt id='totalPrice'>Total price: </dt>
                 <dd id='sum' class="text-right"> </dd>
-
-
 
 
             </dl>
@@ -86,7 +85,11 @@ const cartCheckOut = (productinfo,totalPrice) => {
             </dl>
             <hr>
             <div class="cart-buttons">
-            <button type="submit" class="btn btn-out btn-primary btn-square btn-main" id="place-order"> Place Order </a>
+              <form id='testform' method="POST" action="/users/test"/>
+
+                <dd id='testtext' type='text' name='randomtext'></dd>
+                <button type="submit" class="btn btn-out btn-primary btn-square btn-main" id="place-order">Place Order</button>
+              </form>
               <form class="continue-shopping">
             <button type="submit" class="btn btn-out btn-success btn-square btn-main mt-2">Continue Shopping</button>
               </form>
@@ -109,10 +112,9 @@ const cartCheckOut = (productinfo,totalPrice) => {
 };
 
 
-
-
 $(() => {
   let totalPrice = 0;
+  let arr =[];
 
   $.get('/orders/menu',(data,status) => {
     //console.log(data[0]);
@@ -123,15 +125,34 @@ $(() => {
   }).catch(err => console.log(err));
 
   $(document).on('click','#addtocart',function(){
+
     let parent = $(this)
     let productdets = {
       name: parent.siblings("#productname").text(),
       price : parent.siblings("#productprice").text().slice(8)
     };
-
-    console.log (productdets)
     totalPrice = cartCheckOut(productdets,totalPrice);
+    arr.push({
+      name:parent.siblings("#productname").text(),
+      price: parent.siblings("#productprice").text().slice(8)
+    })
   });
+
+  $(document).on('submit','#testform',function(event) {
+    event.preventDefault();
+    console.log('clicked')
+    arr.push({totalPrice:(totalPrice*1.12).toFixed(2)})
+    const stringarr = (JSON.stringify(arr))
+    $.ajax({
+      url: '/users/test',
+      type: 'POST',
+      data: {test:stringarr}
+    }).then (data => {
+      window.location.replace('/users/2/myorders')
+
+    })
+
+  })
 
 });
 

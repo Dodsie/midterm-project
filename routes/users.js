@@ -38,14 +38,6 @@ module.exports = (db) => {
       });
     });
 
-    router.get('/hello', (req,res) => {
-      db.getTotalCostByUser(req.cookies['user'])
-        .then (result => {
-          res.json('done')
-        })
-    })
-
-
     // MY ORDERS PAGE
     router.get('/:id/myorders', (req,res) => {
       res.render("myOrders")
@@ -90,6 +82,23 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.post('/test', (req,res) => {
+    if (!req.body) {
+      res.status(400).json({ error: 'invalid request: no data in POST body'});
+      return;
+    }
+    //console.log(JSON.parse(req.body))
+    console.log(JSON.parse(req.body.test))
+    //db.insert(req.body)
+
+
+    res.redirect('/users/2/myorders')
+
+
+
+
+  })
 
 
   return router;

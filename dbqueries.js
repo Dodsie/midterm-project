@@ -73,7 +73,6 @@ const getTotalCostByUser = function(userID) {
   return db
     .query(queryString,[userID])
     .then(totalcost => {
-      console.log(totalcost.rows);
       return totalcost.rows;
     }).catch(err => {
       console.log(err.message);
