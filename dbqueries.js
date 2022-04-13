@@ -106,8 +106,4 @@ const insertToOrders = function(userID, date, total) {
 
 
 
-<<<<<<< HEAD
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID};
-=======
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID, insertToOrders}
->>>>>>> 4744101de56a791058d8512a86aade1666366e14
+module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID, insertToOrders};

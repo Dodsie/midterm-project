@@ -95,12 +95,8 @@ module.exports = (db) => {
     db.insertToOrders(req.cookies['user'],d,total)
     //console.log(req.cookies['user'],d,total.totalPrice)
 
-<<<<<<< HEAD
-    res.redirect('/users/2/myorders');
-=======
     //res.redirect(`/users/${req.cookies['user']}/myorders`)
   });
->>>>>>> 4744101de56a791058d8512a86aade1666366e14
 
   // MY ORDERS PAGE
   router.get('/:id/myorders', (req,res) => {

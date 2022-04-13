@@ -155,10 +155,7 @@ $(() => {
     };
 
     totalPrice = (totalPrice -= Number(productdets.price));
-<<<<<<< HEAD
-=======
 
->>>>>>> 4744101de56a791058d8512a86aade1666366e14
 
     const newSumRemove = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
     const PST = (totalPrice * 0.07).toFixed(2);
@@ -169,15 +166,8 @@ $(() => {
     $("#sum").replaceWith(newSumRemove);
     $('#cartTotal').text(`$${cartTotal}`);
     $(this).parent().remove();
-<<<<<<< HEAD
     const indexOfItemDeleted = arr.findIndex(x => x.price == child.text().trim().slice(-5));
     arr.splice(indexOfItemDeleted,1);
-
-=======
-    console.log(arr)
-
-    arr.pop(-1);
->>>>>>> 4744101de56a791058d8512a86aade1666366e14
 
   });
 
