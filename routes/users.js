@@ -96,11 +96,16 @@ module.exports = (db) => {
     //console.log(req.cookies['user'],d,total.totalPrice)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     res.redirect('/users/2/myorders');
 =======
     //res.redirect(`/users/${req.cookies['user']}/myorders`)
   });
 >>>>>>> 4744101de56a791058d8512a86aade1666366e14
+=======
+    //res.redirect(`/users/${req.cookies['user']}/myorders`)
+  });
+>>>>>>> e151d52592502756114eeaf303599da4da50941e
 
   // MY ORDERS PAGE
   router.get('/:id/myorders', (req,res) => {

@@ -81,13 +81,13 @@ const getTotalCostByUser = function(userID) {
 
 const getMenu = function() {
   return db
-  .query(`SELECT name, price, photo, description FROM menu_items`)
-  .then(menu => {
-    return menu.rows
-  }).catch (err => {
-    console.log(err.message)
-  })
-}
+    .query(`SELECT name, price, photo, description FROM menu_items`)
+    .then(menu => {
+      return menu.rows;
+    }).catch(err => {
+      console.log(err.message);
+    });
+};
 
 const insertToOrders = function(userID, date, total) {
   return db
@@ -106,4 +106,4 @@ const insertToOrders = function(userID, date, total) {
 
 
 
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID, insertToOrders}
+module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getPriceByItemID, getOrderByID, insertToOrders};
