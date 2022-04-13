@@ -43,17 +43,19 @@ module.exports = (db) => {
       });
   });
 
+
+
+  // // http://localhost:8080/users/2/login
+  // // http://localhost:8080/users/del
+  // // http://localhost:8080/orders/
   router.get("/", (req, res) => {
-    //sendSMS.sendSMS();
-    res.render("product-page")
+
+    let templateVars = {userID: req.cookies['user']}
+    res.render('product-page', templateVars)
 
   });
-
-
 
 
   return router;
 };
 
-
-//localhost:8080/orders/cart/

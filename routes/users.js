@@ -54,11 +54,12 @@ module.exports = (db) => {
   });
 
 
-
+  // http://localhost:8080/users/del
   router.get("/del", (req, res) => {
     res.clearCookie('user');
     res.send('cookies cleared.')
   })
+
 
   router.get('/:id/login', (req,res) => {
     res.cookie('user',req.params.id);
@@ -93,25 +94,16 @@ module.exports = (db) => {
     console.log(typeof total, total)
 
     db.insertToOrders(req.cookies['user'],d,total)
-    //console.log(req.cookies['user'],d,total.totalPrice)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     res.redirect('/users/2/myorders');
-=======
-    //res.redirect(`/users/${req.cookies['user']}/myorders`)
+
   });
->>>>>>> 4744101de56a791058d8512a86aade1666366e14
-=======
-    //res.redirect(`/users/${req.cookies['user']}/myorders`)
-  });
->>>>>>> e151d52592502756114eeaf303599da4da50941e
 
   // MY ORDERS PAGE
   router.get('/:id/myorders', (req,res) => {
-    res.render("myOrders")
-    });
-
+    let templateVars = {userID: req.cookies['user']}
+    res.render("myOrders",templateVars)
+  });
 
 
   return router;
