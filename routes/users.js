@@ -38,10 +38,6 @@ module.exports = (db) => {
       });
     });
 
-    // MY ORDERS PAGE
-    router.get('/:id/myorders', (req,res) => {
-      res.render("myOrders")
-      });
 
 
   router.get("/", (req, res) => {
@@ -90,13 +86,27 @@ module.exports = (db) => {
     }
     //console.log(JSON.parse(req.body))
     console.log(JSON.parse(req.body.test))
+    const result = JSON.parse(req.body.test)
     //db.insert(req.body)
+    const d = new Date();
+    const total = Number(result[result.length-1].totalPrice)
+    console.log(typeof total, total)
 
+    db.insertToOrders(req.cookies['user'],d,total)
+    //console.log(req.cookies['user'],d,total.totalPrice)
 
+<<<<<<< HEAD
     res.redirect('/users/2/myorders');
+=======
+    //res.redirect(`/users/${req.cookies['user']}/myorders`)
+  });
+>>>>>>> 4744101de56a791058d8512a86aade1666366e14
 
+  // MY ORDERS PAGE
+  router.get('/:id/myorders', (req,res) => {
+    res.render("myOrders")
+    });
 
-  })
 
 
   return router;
