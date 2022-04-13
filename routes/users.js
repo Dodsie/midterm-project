@@ -30,7 +30,6 @@ module.exports = (db) => {
       db.getTotalCostByUser(req.cookies['user'])
       .then(results => {
         res.json(results) //gets all active orders for a user in a array of objs
-
       }).catch(err => {
         res
           .status(500)
@@ -38,20 +37,40 @@ module.exports = (db) => {
       });
     });
 
+    //for AJAX to get all Active Orders for Admin
+    router.get('/checkadmin', (req,res) => {
+      db.checkAdmin(req.cookies['user'])
+        .then (admin => {
+          res.send(admin[0].admin)
+        })
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+    })
+
+    router.get('/getAllActiveTotalsForAdmin', (req,res) => {
+      db.getAllActiveTotalsForAdmin()
+        .then (result => {
+          console.log(result)
+          res.json(result)
+        })
+    });
+
+    router.get('/getAllActiveOrdersForAdmin', (req,res) => {
+      db.getAllActiveOrdersForAdmin()
+        .then (result => {
+          console.log(result)
+          res.json(result)
+        })
+    })
 
 
-  router.get("/", (req, res) => {
-    db.getUsers()
-      .then(data => {
-        const users = data.rows;
-        res.json( {users} );
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+
+
+
+
 
 
 
@@ -67,17 +86,7 @@ module.exports = (db) => {
 
 
 
-  router.get("/:id", (req, res) => {
-     db.getUserByID(req.cookies['user'])
-      .then(data => {
-        res.json( data[0] );
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+
 
   router.post('/test', (req,res) => {
     if (!req.body) {
@@ -114,6 +123,36 @@ module.exports = (db) => {
   router.get('/:id/myorders', (req,res) => {
     res.render("myOrders")
     });
+
+
+
+
+  router.get("/:id", (req, res) => {
+    db.getUserByID(req.cookies['user'])
+     .then(data => {
+       res.json( data[0] );
+     })
+     .catch(err => {
+       res
+         .status(500)
+         .json({ error: err.message });
+     });
+ });
+
+  router.get("/", (req, res) => {
+    db.getUsers()
+      .then(data => {
+        const users = data.rows;
+        res.json( {users} );
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+
 
 
 
