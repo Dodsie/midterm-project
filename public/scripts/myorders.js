@@ -1,8 +1,14 @@
 const orderDetail = (x, data) => {
   let orderBox;
+<<<<<<< HEAD
   let result = [];
   for (const item of data) {
     if (item.order_number === x.id)  {
+=======
+  let result =[];
+  for (const item of data) {
+    if(item.order_number === x.id)  {
+>>>>>>> 7ed6ee81f0ac209e8916b126fe269ede78337718
       orderBox = `
         <div class="row">
           <div id='allNames' class="col-md-8 col-lg-9">
@@ -13,7 +19,11 @@ const orderDetail = (x, data) => {
           </div>
         </div>
         `;
+<<<<<<< HEAD
       result.push(orderBox);
+=======
+        result.push(orderBox)
+>>>>>>> 7ed6ee81f0ac209e8916b126fe269ede78337718
     }
   }
   return result;
@@ -21,8 +31,13 @@ const orderDetail = (x, data) => {
 
 
 const otherDetails = (template,data) => {
+<<<<<<< HEAD
   const total = (template.total * 1.12).toFixed(2);
   const receipt = `
+=======
+    const total = (template.total*1.12).toFixed(2);
+    const receipt = `
+>>>>>>> 7ed6ee81f0ac209e8916b126fe269ede78337718
 
       <div class="col-lg-8 col-xl-6">
         <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
@@ -61,6 +76,7 @@ const otherDetails = (template,data) => {
 
         </div>
       </div>
+<<<<<<< HEAD
     `;
   return receipt;
 };
@@ -90,6 +106,37 @@ const addinGSTPST = (x) => {
   return taxes;
 
 };
+=======
+    `
+  return receipt
+};
+
+const addinGSTPST = (x) => {
+  const GST = (x.total * 0.05).toFixed(2)
+  const PST = (x.total * 0.07).toFixed(2)
+  let taxes = `
+        <div class="row">
+          <div class="col-md-8 col-lg-9">
+            <p>GST (5.00%)</p>
+          </div>
+          <div class="col-md-4 col-lg-3">
+            <p> $${GST} </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-8 col-lg-9">
+            <p>PST (7.00%)</p>
+          </div>
+          <div class="col-md-4 col-lg-3">
+            <p> $${PST} </p>
+          </div>
+        </div>
+        `;
+  return taxes;
+
+}
+>>>>>>> 7ed6ee81f0ac209e8916b126fe269ede78337718
 
 
 
@@ -98,12 +145,21 @@ $(() => {
   }).then((template) => {
     $.get('/users/getmyorders',(data,status) => {
       for (const x of template) {
+<<<<<<< HEAD
         $('#receiptBox').append(otherDetails(x));
         $(`#itemList-${x.id}`).append(orderDetail(x,data));
         $(`#itemList-${x.id}`).append(addinGSTPST(x));
       }
     }).catch(err => console.log(err));
   });
+=======
+        $('#receiptBox').append(otherDetails(x))
+        $(`#itemList-${x.id}`).append(orderDetail(x,data))
+        $(`#itemList-${x.id}`).append(addinGSTPST(x))
+      }
+    }).catch(err => console.log(err));
+  })
+>>>>>>> 7ed6ee81f0ac209e8916b126fe269ede78337718
 });
 
 

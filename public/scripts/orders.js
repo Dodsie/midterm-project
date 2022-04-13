@@ -126,16 +126,24 @@ $(() => {
 
   }).catch(err => console.log(err));
 
+<<<<<<< HEAD
 
 
   $(document).on('click','#addtocart',function() {
+=======
+  $(document).on('click','#addtocart',function(){
+
+>>>>>>> 7ed6ee81f0ac209e8916b126fe269ede78337718
     let parent = $(this)
     let productdets = {
       name: parent.siblings("#productname").text(),
       price : parent.siblings("#productprice").text().slice(8)
     };
+<<<<<<< HEAD
 
     console.log(productdets);
+=======
+>>>>>>> 7ed6ee81f0ac209e8916b126fe269ede78337718
     totalPrice = cartCheckOut(productdets,totalPrice);
     arr.push({
       name:parent.siblings("#productname").text(),
@@ -143,6 +151,7 @@ $(() => {
     })
   });
 
+<<<<<<< HEAD
 
 
   $(document).on('click','.delete-button-cart',function() {
@@ -173,6 +182,8 @@ $(() => {
 
   });
 
+=======
+>>>>>>> 7ed6ee81f0ac209e8916b126fe269ede78337718
   $(document).on('submit','#testform',function(event) {
     event.preventDefault();
     console.log('clicked')
