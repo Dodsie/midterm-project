@@ -88,6 +88,7 @@ module.exports = (db) => {
     console.log(JSON.parse(req.body.test));
     const result = JSON.parse(req.body.test);
     //db.insert(req.body)
+<<<<<<< HEAD
     const d = new Date();
     const total = Number(result[result.length - 1].totalPrice);
     console.log(typeof total, total);
@@ -96,6 +97,28 @@ module.exports = (db) => {
     //console.log(req.cookies['user'],d,total.totalPrice)
 
     res.redirect(`/users/${req.cookies['user']}/myorders`)
+=======
+    const today = new Date();
+    const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+'   '+today.getHours()+':'+today.getMinutes()+':'+today.getSeconds();
+    console.log(date)
+    const total = Number(result[result.length-1].totalPrice)
+    const itemList = result.slice(0,-1)
+    //console.log(typeof total, total)
+
+    db.insertToOrders(req.cookies['user'],date,total)
+      .then((id) => {
+         for (const item of itemList) {
+          db.getMenuIDFromName(item.name)
+          .then (menuid => {
+            db.insertOrder_Items(id,menuid)
+            .then( data => {console.log('Inserted')})
+          })
+        }
+      }).then (() => {
+          res.redirect(`/users/${req.cookies['user']}/myorders`)
+      })
+
+>>>>>>> 3f374a978e0c42bef0f04b1f9e22021dd7dff772
   });
 
   // MY ORDERS PAGE
@@ -109,6 +132,7 @@ module.exports = (db) => {
 };
 
 
+<<<<<<< HEAD
 //TESTING
 // router.get('/:id/getmyorders', (req,res) => {
 //   Promise.all([db.getActiveOrders(req.params.id),db.getTotalCostByActive(req.params.id)])
@@ -124,3 +148,6 @@ module.exports = (db) => {
 //         .json({ error: err.message });
 //     });
 //   });
+=======
+
+>>>>>>> 3f374a978e0c42bef0f04b1f9e22021dd7dff772
