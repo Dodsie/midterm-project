@@ -25,8 +25,7 @@ const otherDetails = (template,data) => {
     const receipt = `
 
       <div class="col-lg-8 col-xl-6">
-        <div class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
-
+        <div id="my-orders-box" class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
           <div class="card-body p-5">
             <p class="lead fw-bold mb-5" style="color: #f37a27;">Purchase Reciept</p>
             <div class="row">
