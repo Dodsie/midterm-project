@@ -1,6 +1,7 @@
 // PG database client/connection setup
 const res = require("express/lib/response");
 const { Pool } = require("pg");
+const { user } = require("pg/lib/defaults");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
 db.connect(()=>{
@@ -121,6 +122,59 @@ const insertOrder_Items = function(orderid, menuid) {
     });
 };
 
+const getAllActiveTotalsForAdmin = function () {
+  return db
+    .query(`
+      SELECT orders.id, total, users.name, orders.order_date
+      FROM orders JOIN users on users.id = orders.user_id
+      WHERE active=TRUE
+      GROUP by orders.id, users.name ORDER BY orders.id
+    `).then((allitems) => {
+      console.log(allitems.rows)
+      return(allitems.rows)
+    })
+    .catch (err => {
+      console.log(err.message)
+    })
+}
+
+const getAllActiveOrdersForAdmin = function () {
+  return db
+    .query(`
+      SELECT order_items.order_id as order_number, order_items.menu_items_id, menu_items.name, users.name as customer, menu_items.price
+      FROM order_items
+      JOIN orders ON orders.id = order_items.order_id
+      JOIN menu_items ON order_items.menu_items_id = menu_items.id
+      JOIN users ON users.id = orders.user_id
+      WHERE orders.active = TRUE
+      ORDER BY order_number;
+    `).then((totals) => {
+      console.log(totals.rows)
+      return(totals.rows)
+    })
+    .catch (err => {
+      console.log(err.message)
+    })
+};
+const checkAdmin = function(userid) {
+  return db
+    .query(`
+      SELECT admin FROM users WHERE id = $1
+    `,[userid])
+    .then(admin => {
+      return admin.rows
+    })
+}
+
+const updateOrderStatus = function(orderid) {
+  return db
+    .query(`
+      UPDATE orders
+      SET active = FALSE
+      WHERE id = $1;
+    `,[orderid])
+}
 
 
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getMenuIDFromName, getOrderByID, insertToOrders, insertOrder_Items};
+
+module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getMenuIDFromName, getOrderByID, insertToOrders, insertOrder_Items, getAllActiveOrdersForAdmin, getAllActiveTotalsForAdmin, checkAdmin, updateOrderStatus};
