@@ -8,6 +8,8 @@
 
 const express = require('express');
 const router  = express.Router();
+const sendSMS = require('../sendSMS')
+let idAndETA = {};
 
 // http://localhost:8080/users
 module.exports = (db) => {
@@ -86,7 +88,7 @@ module.exports = (db) => {
 
 
 
-
+  //POST REQUEST FOR PLACING AN ORDER
   router.post('/test', (req,res) => {
     if (!req.body) {
       res.status(400).json({ error: 'invalid request: no data in POST body'});
@@ -101,6 +103,9 @@ module.exports = (db) => {
     const itemList = result.slice(0,-1);
     db.insertToOrders(req.cookies['user'],date,total)
       .then((id) => {
+        idAndETA[id] = null;
+        sendSMS.sendSMS(idAndETA);
+        console.log('this is a new id', id)
         for (const item of itemList) {
           db.getMenuIDFromName(item.name)
             .then(menuid => {
@@ -114,6 +119,7 @@ module.exports = (db) => {
         res.redirect(`/users/${req.cookies['user']}/myorders`);
       });
   });
+  module.exports = {idAndETA}
 
   //Update an ORDER to active = false upon click of button
   router.post('/updateOrder', (req,res) => {
@@ -168,9 +174,6 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
-
-
-
 
 
   return router;

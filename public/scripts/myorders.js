@@ -45,7 +45,7 @@ const orderDetail = (x, data,admin) => {
 };
 
 
-const otherDetails = (template,admin) => {
+const otherDetails = (template,admin,eta = null) => {
   if (admin) {
     const total = (template.total);
     console.log(template)
@@ -116,7 +116,7 @@ const otherDetails = (template,admin) => {
                 </div>
                 <div class="col mb-3">
                   <p id="orderDate" class="small text-muted mb-1">ETA</p>
-                  <p id="ETA"> N/A</p>
+                  <p id="ETA">${eta} Minutes</p>
                 </div>
               </div>
 
@@ -141,6 +141,7 @@ const otherDetails = (template,admin) => {
           </div>
         </div>
       `;
+
     return receipt;
   }
 };
@@ -176,6 +177,7 @@ const addinGSTPST = (x,admin) => {
 
 $(() => {
   let admin = false;
+  let eta = null;
   $.get('/users/checkadmin', (result) => {
     console.log('am i admin?',result)
     if (result) {
@@ -201,7 +203,7 @@ $(() => {
       }).then((template) => {
         $.get('/users/getmyorders',(allorderitems) => {
           for (const x of template) {
-            $('#receiptBox').prepend(otherDetails(x),admin);
+            $('#receiptBox').prepend(otherDetails(x,admin,eta));
             $(`#itemList-${x.id}`).append(orderDetail(x,allorderitems,admin));
             $(`#itemList-${x.id}`).append(addinGSTPST(x,admin));
           }
@@ -213,9 +215,11 @@ $(() => {
   $(document).on('submit','#testform',function(event) {
     event.preventDefault();
     console.log('clicked');
-    const ordernumber = $('#orderNo').text()
+    const ordernumber = $(this).closest(":has(.row)").find('#orderNo').text()
     console.log(ordernumber)
     alert(`Order Number ${ordernumber} Completed!`)
+
+
 
 
     $.ajax({
@@ -226,6 +230,11 @@ $(() => {
       window.location.replace('/users/1/myorders');
     })
    });
+
+  $.get('/orders/etaTime', (time) => {
+    eta = time;
+  })
+
 
 });
 

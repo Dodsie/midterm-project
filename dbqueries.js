@@ -177,4 +177,5 @@ const updateOrderStatus = function(orderid) {
 
 
 
+
 module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getMenuIDFromName, getOrderByID, insertToOrders, insertOrder_Items, getAllActiveOrdersForAdmin, getAllActiveTotalsForAdmin, checkAdmin, updateOrderStatus};
