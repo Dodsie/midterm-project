@@ -1,0 +1,23 @@
+#about-container {
+  display: flex;
+  justify-content: center;
+}
+
+#about-header {
+  padding-left: 1.5em;
+}
+
+#about-body {
+  display: flex;
+  justify-content: center;
+}
+
+#about-box {
+  border: 3px solid #f37a27;
+  border-radius: 5px;
+  width: 40%;
+  padding: 15px;
+  margin-left: 8em;
+  margin-right: 8em;
+}
+

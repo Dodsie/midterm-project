@@ -9,7 +9,7 @@
 const express = require('express');
 const router  = express.Router();
 
-
+// http://localhost:8080/users
 module.exports = (db) => {
 
 

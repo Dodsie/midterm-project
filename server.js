@@ -62,7 +62,11 @@ app.use("/orders", ordersRoutes(db));
 app.get("/", (req, res) => {
   let templateVars = {userID: req.cookies['user']};
   res.render("index", templateVars);
-  //console.log(process.env)
+});
+
+app.get("/about", (req, res) => {
+  let templateVars = {userID: req.cookies['user']};
+  res.render("about", templateVars);
 });
 
 app.listen(PORT, () => {

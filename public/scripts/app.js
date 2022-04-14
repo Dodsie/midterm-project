@@ -22,12 +22,12 @@ $(() => {
     event.preventDefault();
     window.location.href = "/about";
   });
-//need to fix this
+  //need to fix this
   $('.orders-button').on('click', function(event) {
     event.preventDefault();
-    //   window.location.href="";
-    $.get(`/users/${}`)
+    window.location.href="users/2/myOrders";
   });
+
 
 
 });

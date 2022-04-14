@@ -70,5 +70,16 @@
   margin-bottom: 0!important;
 }
 
+#testform {
+  display: flex;
+  flex-direction: column;
+}
 
+.continue-shopping {
+  display: flex;
+  flex-direction: column;
+}
 
+#empty-cart {
+  background-color: red!important;
+}
