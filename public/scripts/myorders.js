@@ -10,7 +10,7 @@ const orderDetail = (x, data,admin) => {
               <p>${item.name}</p>
             </div>
             <div class="col-md-4 col-lg-3">
-              <id='allPrices' p>$${item.price}</p>
+              <id='allPrices' p>$${(item.price).toFixed(2)}</p>
             </div>
           </div>
           `;
@@ -30,7 +30,7 @@ const orderDetail = (x, data,admin) => {
               <p>${item.name}</p>
             </div>
             <div class="col-md-4 col-lg-3">
-              <id='allPrices' p>$${item.price}</p>
+              <id='allPrices' p>$${(item.price).toFixed(2)}</p>
             </div>
           </div>
           `;
@@ -102,9 +102,9 @@ const otherDetails = (template,admin,eta) => {
     const total = (template.total);
     const receipt = `
         <div class="col-lg-8 col-xl-6">
-          <div id="my-orders-box" class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
+          <div id="my-orders-box" class="card border-top border-bottom border-3";">
             <div class="card-body p-5">
-              <p class="lead fw-bold mb-5" style="color: #f37a27;">Purchase Reciept</p>
+              <p class="lead fw-bold mb-5">Purchase Reciept</p>
               <div class="row">
                 <div class="col mb-3">
                   <p id="orderDate" class="small text-muted mb-1">Date And Time</p>
@@ -125,7 +125,7 @@ const otherDetails = (template,admin,eta) => {
 
               <div class="row my-4">
                 <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
-                  <p class="lead fw-bold mb-0" style="color: #f37a27;">$${total}</p>
+                  <p class="lead fw-bold mb-0"">$${Number((total)).toFixed(2)}</p>
                 </div>
               </div>
               <div class="row">
