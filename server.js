@@ -61,7 +61,11 @@ app.use("/orders", ordersRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
+<<<<<<< HEAD
   let templateVars = {userID: req.cookies['user']};
+=======
+  let templateVars = {userID: req.cookies['user']}
+>>>>>>> 7cde613bff72e47e937ebc3ba9b82be6f422fa21
   res.render("index", templateVars);
   //console.log(process.env)
 });

@@ -54,9 +54,16 @@ module.exports = (db) => {
     //sendSMS.sendSMS();
     res.render("about");
 
+
+  // // http://localhost:8080/users/2/login
+  // // http://localhost:8080/users/del
+  // // http://localhost:8080/orders/
+  router.get("/", (req, res) => {
+
+    let templateVars = {userID: req.cookies['user']}
+    res.render('product-page', templateVars)
+
   });
-
-
 
   //ROUTER TWILLIO -------->>>>
   // GET: /orders
@@ -144,5 +151,3 @@ module.exports = (db) => {
   return router;
 };
 
-
-//localhost:8080/orders/cart/

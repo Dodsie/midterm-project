@@ -152,7 +152,6 @@ $(() => {
 
     totalPrice = (totalPrice -= Number(productdets.price));
 
-
     const newSumRemove = `<dd id='sum' class="text-right">$${totalPrice.toFixed(2)} </dd>`;
     const PST = (totalPrice * 0.07).toFixed(2);
     const GST = (totalPrice * 0.05).toFixed(2);
@@ -162,8 +161,12 @@ $(() => {
     $("#sum").replaceWith(newSumRemove);
     $('#cartTotal').text(`$${cartTotal}`);
     $(this).parent().remove();
+
     const indexOfItemDeleted = arr.findIndex(x => x.price == child.text().trim().slice(-5));
     arr.splice(indexOfItemDeleted,1);
+    console.log(arr)
+
+    arr.pop(-1);
 
   });
 

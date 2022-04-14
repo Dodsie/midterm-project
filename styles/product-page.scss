@@ -11,7 +11,14 @@
   width: 90%
 }
 
+button#place-order {
+  background: #198754;
+}
 
+
+button.btn.btn-out.btn-success.btn-square.btn-main.mt-2 {
+    background: #b81616;
+}
 // product-image
 .card-img-top {
   padding: 35px;
@@ -70,5 +77,14 @@
   margin-bottom: 0!important;
 }
 
+.continue-shopping {
+  display: flex;
+  flex-direction: column;
+}
+
+#testform {
+  display: flex;
+  flex-direction: column;
+}
 
 
