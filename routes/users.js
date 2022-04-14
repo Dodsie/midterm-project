@@ -103,7 +103,8 @@ module.exports = (db) => {
     const itemList = result.slice(0,-1);
     db.insertToOrders(req.cookies['user'],date,total)
       .then((id) => {
-        sendSMS.sendSMS(id);
+        sendSMS.sendSMS(`CUSTOMER's MESSAGE--------------------\nYour order has been placed! \nOrder Number: ${id}. \nRestaurant will provide an ETA shortly. `);
+        sendSMS.sendSMS(`OWNER's MESSAGE--------------------\nNew order Received! \nOrder Number: ${id}. \nPlease Enter an ETA in minutes. `);
         console.log('this is a new id', id)
         for (const item of itemList) {
           db.getMenuIDFromName(item.name)

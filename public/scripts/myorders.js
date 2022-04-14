@@ -250,16 +250,7 @@ $(() => {
     eta = time;
     appendall(eta)
 
-    // console.log('current template id ',template.id, 'eta id ',eta.id)
-    // if (template.id == eta.id) {
 
-    //   console.log('AM DOING REPLACE NOW ON ID' ,template.id)
-    //   $("#ETA").text('wtf')
-
-    // } else {
-    //   console.log('in current order #.' ,template.id)
-    //   $('#ETA').text('N/A')
-    // }
   })
 
 
