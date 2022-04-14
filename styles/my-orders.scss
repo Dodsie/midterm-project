@@ -30,6 +30,7 @@
 
 #my-orders-box {
   margin: 1.5em!important;
+  border-color: grey !important;
 }
 
 #receiptBox {
@@ -38,22 +39,24 @@
 
 }
 
-// .py-5 {
-//   display: flex;
-//   flex-direction: column;
-//   background: #c4cecf;
-//   border-bottom: grey solid 2px;
-//     border-top: grey solid 2px;
-// }
+.py-5 {
+  display: flex;
+  flex-direction: column;
+  background: #c4cecf;
+  border: grey solid 2px;
+  // border-top: grey solid 2px;
+}
 
-// header#header-top-image {
-//   border-top: grey solid 4px;
-// }
+header#header-top-image {
+  border-top: grey solid 4px;
+}
 
-// button.btn.btn-outline-dark {
-//   background: #aeaeae;
-// }
+button.btn.btn-outline-dark {
+  background: #c4cecf;
+}
 
-// h1.display-4.fw-bolder {
-//   color: deeppink;
-// }
+h1.display-4.fw-bolder {
+  color: deeppink;
+}
+
+
