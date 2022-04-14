@@ -88,9 +88,6 @@ const cartCheckOut = (productinfo,totalPrice) => {
                 <dd id='testtext' type='text' name='randomtext'></dd>
                 <button type="submit" class="btn btn-out btn-primary btn-square btn-main" id="place-order">Place Order</button>
               </form>
-              <form class="continue-shopping">
-            <button type="submit" class="btn btn-out btn-success btn-square btn-main mt-2">Continue Shopping</button>
-              </form>
             </div>
         </div>
     </div>
