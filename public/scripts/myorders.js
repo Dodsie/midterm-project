@@ -148,8 +148,8 @@ const otherDetails = (template,admin,eta) => {
 
 
 const addinGSTPST = (x,admin) => {
-  const GST = (x.total * 0.05).toFixed(2)
-  const PST = (x.total * 0.07).toFixed(2)
+  const GST = (x.total/1.12 * 0.05).toFixed(2)
+  const PST = (x.total/1.12 * 0.07).toFixed(2)
   let taxes = `
         <div class="row">
           <div class="col-md-8 col-lg-9">
