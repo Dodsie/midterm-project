@@ -21,6 +21,7 @@
   flex-direction: row;
   justify-content: space-around;
   min-width: 600px;
+  border: grey solid 2px;
 }
 
 // product descriptions container
@@ -43,6 +44,9 @@
 #combined-page {
     display: flex;
     justify-content: space-around;
+    background: #c4cecf;
+    border-bottom: grey solid 2px;
+    border-top: grey solid 2px;
 }
 
 #checkout-box {
@@ -82,4 +86,24 @@
 
 #empty-cart {
   background-color: red!important;
+}
+
+header#header-top-image {
+  border-top: grey solid 4px;
+}
+
+button.btn.btn-outline-dark {
+  background: #aeaeae;
+}
+
+h1.display-4.fw-bolder {
+  color: deeppink;
+}
+
+#checkout-box-bailey {
+  border: grey solid 2px;
+}
+
+#coupon-code {
+  border: grey solid 2px;
 }
