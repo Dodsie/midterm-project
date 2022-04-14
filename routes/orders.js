@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const Order = require('../models/order');
+const sendSMS = require('../sendSMS');
 
 let eta = [];
 
@@ -24,10 +24,9 @@ module.exports = (db) => {
     db.getLastOrderID()
       .then((orderid) => {
         eta.push({id:orderid,eta:time})
-
-
-
         res.send(eta)
+      }).then(() => {
+        sendSMS.sendSMS(`CUSTOMER's MESSAGE--------------------\nYour Order ETA has been updated! Please check My Orders page.`)
       })
 
   })
