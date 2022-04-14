@@ -3,14 +3,14 @@
 const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 
-function sendSMS (obj) {
+function sendSMS (id) {
   client.messages.create({
-    body: 'Hello from Node',
+    body: `New order Received! Order Number: ${id}. Please Enter an ETA in minutes. `,
     to: '+17789281683',
     from: '++19105656933'
  }).then(message => {
-    //console.log(message)
-    //console.log(obj)
+    console.log(message)
+
   })
 
    .catch(error => console.log(error))

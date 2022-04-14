@@ -45,7 +45,7 @@ const orderDetail = (x, data,admin) => {
 };
 
 
-const otherDetails = (template,admin,eta = null) => {
+const otherDetails = (template,admin,eta) => {
   if (admin) {
     const total = (template.total);
     console.log(template)
@@ -116,14 +116,12 @@ const otherDetails = (template,admin,eta = null) => {
                 </div>
                 <div class="col mb-3">
                   <p id="orderDate" class="small text-muted mb-1">ETA</p>
-                  <p id="ETA">${eta} Minutes</p>
+                  <p id="ETA"> Not Available </p>
                 </div>
               </div>
 
               <div id="itemList-${template.id}" class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
-
               </div>
-
 
               <div class="row my-4">
                 <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
@@ -141,6 +139,7 @@ const otherDetails = (template,admin,eta = null) => {
           </div>
         </div>
       `;
+
 
     return receipt;
   }
@@ -173,19 +172,15 @@ const addinGSTPST = (x,admin) => {
   return taxes;
 };
 
-
-
-$(() => {
+const appendall = function(eta) {
   let admin = false;
-  let eta = null;
+
   $.get('/users/checkadmin', (result) => {
-    console.log('am i admin?',result)
     if (result) {
       admin = true;
     }
   }).then(()=>{
     if (admin) {
-      console.log('can it be read here' ,admin)
       $.get('/users/getAllActiveTotalsForAdmin', (orderSummary) => {
       }).then((template) => {
         $.get('/users/getAllActiveOrdersForAdmin',(allorderitems) => {
@@ -198,12 +193,24 @@ $(() => {
       });
     }
     else {
-      console.log('can it be read here' ,admin)
       $.get('/users/activeTotals', (orderSummary) => {
       }).then((template) => {
         $.get('/users/getmyorders',(allorderitems) => {
           for (const x of template) {
-            $('#receiptBox').prepend(otherDetails(x,admin,eta));
+
+            $('#receiptBox').prepend(otherDetails(x,admin));
+
+            for (const singleEta of eta) {
+              console.log(singleEta)
+              if (x.id == singleEta.id) {
+
+
+                //console.log('AM DOING REPLACE NOW ON ID' ,template.id)
+                $("#ETA").text(`${singleEta.eta} Minutes`)
+
+              }
+            }
+
             $(`#itemList-${x.id}`).append(orderDetail(x,allorderitems,admin));
             $(`#itemList-${x.id}`).append(addinGSTPST(x,admin));
           }
@@ -211,6 +218,13 @@ $(() => {
       });
     }
   });
+
+}
+
+$(() => {
+  let eta;
+
+
 
   $(document).on('submit','#testform',function(event) {
     event.preventDefault();
@@ -232,7 +246,20 @@ $(() => {
    });
 
   $.get('/orders/etaTime', (time) => {
+    console.log(time)
     eta = time;
+    appendall(eta)
+
+    // console.log('current template id ',template.id, 'eta id ',eta.id)
+    // if (template.id == eta.id) {
+
+    //   console.log('AM DOING REPLACE NOW ON ID' ,template.id)
+    //   $("#ETA").text('wtf')
+
+    // } else {
+    //   console.log('in current order #.' ,template.id)
+    //   $('#ETA').text('N/A')
+    // }
   })
 
 

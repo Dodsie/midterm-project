@@ -9,7 +9,7 @@
 const express = require('express');
 const router  = express.Router();
 const sendSMS = require('../sendSMS')
-let idAndETA = {};
+
 
 // http://localhost:8080/users
 module.exports = (db) => {
@@ -103,8 +103,7 @@ module.exports = (db) => {
     const itemList = result.slice(0,-1);
     db.insertToOrders(req.cookies['user'],date,total)
       .then((id) => {
-        idAndETA[id] = null;
-        sendSMS.sendSMS(idAndETA);
+        sendSMS.sendSMS(id);
         console.log('this is a new id', id)
         for (const item of itemList) {
           db.getMenuIDFromName(item.name)
@@ -119,7 +118,7 @@ module.exports = (db) => {
         res.redirect(`/users/${req.cookies['user']}/myorders`);
       });
   });
-  module.exports = {idAndETA}
+
 
   //Update an ORDER to active = false upon click of button
   router.post('/updateOrder', (req,res) => {

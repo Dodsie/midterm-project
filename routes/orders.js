@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const Order = require('../models/order');
 
-let sometime;
+let eta = [];
 
 //localhost:8080/orders/
 module.exports = (db) => {
@@ -19,12 +19,20 @@ module.exports = (db) => {
   });
 
   router.post('/smsupdate', (req, res) => {
-    eta = req.body.Body
-    console.log(req.body.Body)
-    //console.log(idAndETA)
+    const time = req.body.Body
+
+    db.getLastOrderID()
+      .then((orderid) => {
+        eta.push({id:orderid,eta:time})
+
+
+
+        res.send(eta)
+      })
+
   })
   router.get('/etaTime', (req,res) => {
-    //res.send(idAndETA)
+    res.send(eta)
   })
 
 
