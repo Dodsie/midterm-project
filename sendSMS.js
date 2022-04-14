@@ -1,16 +1,21 @@
 
 
-// const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
+const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
 
-// function sendSMS () {
-//   client.messages.create({
-//     body: 'Hello from Node',
-//     to: '+16047260524',
-//     from: '++19105656933'
-//  }).then(message => console.log(message))
-//    // here you can implement your fallback code
-//    .catch(error => console.log(error))
-// }
+function sendSMS (string) {
+  client.messages.create({
+    body: string,
+    to: process.env.PHONE_NUMBER,
+    from: '+12058919937'
+ }).then(message => {
+    console.log(message)
 
-// module.exports = {sendSMS}
+  })
+
+    .catch(error => console.log(error));
+}
+
+
+
+module.exports = {sendSMS};

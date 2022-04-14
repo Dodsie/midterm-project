@@ -175,6 +175,16 @@ const updateOrderStatus = function(orderid) {
     `,[orderid])
 }
 
+const getLastOrderID = function () {
+  return db
+    .query(`SELECT id FROM orders ORDER BY id DESC LIMIT 1;`)
+    .then(orderid => {
+      console.log('last order #', orderid.rows[0].id);
+      return orderid.rows[0].id;
+    })
+
+}
 
 
-module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getMenuIDFromName, getOrderByID, insertToOrders, insertOrder_Items, getAllActiveOrdersForAdmin, getAllActiveTotalsForAdmin, checkAdmin, updateOrderStatus};
+
+module.exports = {getUsers, getUserByID, getActiveOrders, getTotalCostByUser, getMenu, getMenuIDFromName, getOrderByID, insertToOrders, insertOrder_Items, getAllActiveOrdersForAdmin, getAllActiveTotalsForAdmin, checkAdmin, updateOrderStatus, getLastOrderID};

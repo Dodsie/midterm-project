@@ -49,7 +49,7 @@ const cartCheckOut = (productinfo,totalPrice) => {
   const checkoutbox = `
   <aside id="checkout-box" class="col-lg-3">
     <div class="card mb-3">
-        <div class="card-body">
+        <div class="card-body" id="coupon-code">
             <form>
                 <div class="form-group"> <label>Have coupon?</label>
                     <div class="input-group"> <input type="text" class="form-control coupon" name="" placeholder="Coupon code"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon">Apply</button> </span> </div>
@@ -59,7 +59,7 @@ const cartCheckOut = (productinfo,totalPrice) => {
     </div>
     <div class="card">
 
-        <div class="card-body">
+        <div class="card-body" id="checkout-box-bailey">
             <dl class="dlist-align">
                 <dt id='yourItems'>Your items:</dt>
 
@@ -87,9 +87,6 @@ const cartCheckOut = (productinfo,totalPrice) => {
 
                 <dd id='testtext' type='text' name='randomtext'></dd>
                 <button type="submit" class="btn btn-out btn-primary btn-square btn-main" id="place-order">Place Order</button>
-              </form>
-              <form class="continue-shopping">
-            <button type="submit" class="btn btn-out btn-success btn-square btn-main mt-2">Continue Shopping</button>
               </form>
             </div>
         </div>

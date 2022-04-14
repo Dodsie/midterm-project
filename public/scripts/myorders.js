@@ -10,7 +10,7 @@ const orderDetail = (x, data,admin) => {
               <p>${item.name}</p>
             </div>
             <div class="col-md-4 col-lg-3">
-              <id='allPrices' p>$${item.price}</p>
+              <id='allPrices' p>$${(item.price).toFixed(2)}</p>
             </div>
           </div>
           `;
@@ -30,7 +30,7 @@ const orderDetail = (x, data,admin) => {
               <p>${item.name}</p>
             </div>
             <div class="col-md-4 col-lg-3">
-              <id='allPrices' p>$${item.price}</p>
+              <id='allPrices' p>$${(item.price).toFixed(2)}</p>
             </div>
           </div>
           `;
@@ -45,7 +45,7 @@ const orderDetail = (x, data,admin) => {
 };
 
 
-const otherDetails = (template,admin) => {
+const otherDetails = (template,admin,eta) => {
   if (admin) {
     const total = (template.total);
     console.log(template)
@@ -102,9 +102,9 @@ const otherDetails = (template,admin) => {
     const total = (template.total);
     const receipt = `
         <div class="col-lg-8 col-xl-6">
-          <div id="my-orders-box" class="card border-top border-bottom border-3" style="border-color: #f37a27 !important;">
+          <div id="my-orders-box" class="card border-top border-bottom border-3";">
             <div class="card-body p-5">
-              <p class="lead fw-bold mb-5" style="color: #f37a27;">Purchase Reciept</p>
+              <p class="lead fw-bold mb-5">Purchase Reciept</p>
               <div class="row">
                 <div class="col mb-3">
                   <p id="orderDate" class="small text-muted mb-1">Date And Time</p>
@@ -116,18 +116,16 @@ const otherDetails = (template,admin) => {
                 </div>
                 <div class="col mb-3">
                   <p id="orderDate" class="small text-muted mb-1">ETA</p>
-                  <p id="ETA"> N/A</p>
+                  <p id="ETA"> Not Available </p>
                 </div>
               </div>
 
               <div id="itemList-${template.id}" class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
-
               </div>
-
 
               <div class="row my-4">
                 <div class="col-md-4 offset-md-8 col-lg-3 offset-lg-9">
-                  <p class="lead fw-bold mb-0" style="color: #f37a27;">$${total}</p>
+                  <p class="lead fw-bold mb-0"">$${Number((total)).toFixed(2)}</p>
                 </div>
               </div>
               <div class="row">
@@ -141,6 +139,8 @@ const otherDetails = (template,admin) => {
           </div>
         </div>
       `;
+
+
     return receipt;
   }
 };
@@ -148,8 +148,8 @@ const otherDetails = (template,admin) => {
 
 
 const addinGSTPST = (x,admin) => {
-  const GST = (x.total * 0.05).toFixed(2)
-  const PST = (x.total * 0.07).toFixed(2)
+  const GST = (x.total/1.12 * 0.05).toFixed(2)
+  const PST = (x.total/1.12 * 0.07).toFixed(2)
   let taxes = `
         <div class="row">
           <div class="col-md-8 col-lg-9">
@@ -172,18 +172,15 @@ const addinGSTPST = (x,admin) => {
   return taxes;
 };
 
-
-
-$(() => {
+const appendall = function(eta) {
   let admin = false;
+
   $.get('/users/checkadmin', (result) => {
-    console.log('am i admin?',result)
     if (result) {
       admin = true;
     }
   }).then(()=>{
     if (admin) {
-      console.log('can it be read here' ,admin)
       $.get('/users/getAllActiveTotalsForAdmin', (orderSummary) => {
       }).then((template) => {
         $.get('/users/getAllActiveOrdersForAdmin',(allorderitems) => {
@@ -196,12 +193,24 @@ $(() => {
       });
     }
     else {
-      console.log('can it be read here' ,admin)
       $.get('/users/activeTotals', (orderSummary) => {
       }).then((template) => {
         $.get('/users/getmyorders',(allorderitems) => {
           for (const x of template) {
-            $('#receiptBox').prepend(otherDetails(x),admin);
+
+            $('#receiptBox').prepend(otherDetails(x,admin));
+
+            for (const singleEta of eta) {
+              console.log(singleEta)
+              if (x.id == singleEta.id) {
+
+
+                //console.log('AM DOING REPLACE NOW ON ID' ,template.id)
+                $("#ETA").text(`${singleEta.eta} Minutes`)
+
+              }
+            }
+
             $(`#itemList-${x.id}`).append(orderDetail(x,allorderitems,admin));
             $(`#itemList-${x.id}`).append(addinGSTPST(x,admin));
           }
@@ -210,12 +219,21 @@ $(() => {
     }
   });
 
+}
+
+$(() => {
+  let eta;
+
+
+
   $(document).on('submit','#testform',function(event) {
     event.preventDefault();
     console.log('clicked');
-    const ordernumber = $('#orderNo').text()
+    const ordernumber = $(this).closest(":has(.row)").find('#orderNo').text()
     console.log(ordernumber)
     alert(`Order Number ${ordernumber} Completed!`)
+
+
 
 
     $.ajax({
@@ -226,6 +244,15 @@ $(() => {
       window.location.replace('/users/1/myorders');
     })
    });
+
+  $.get('/orders/etaTime', (time) => {
+    console.log(time)
+    eta = time;
+    appendall(eta)
+
+
+  })
+
 
 });
 

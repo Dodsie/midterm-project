@@ -30,10 +30,35 @@
 
 #my-orders-box {
   margin: 1.5em!important;
+  border-color: grey !important;
 }
 
 #receiptBox {
   display: flex;
   flex-direction: column!important;
-
 }
+
+.py-5 {
+  display: flex;
+  flex-direction: column;
+  background: #c4cecf;
+  // border: grey solid 2px;
+  // border-top: grey solid 2px;
+}
+section.py-5 {
+  border-top: grey solid 4px;
+}
+
+header#header-top-image {
+  border-top: grey solid 4px;
+}
+
+button.btn.btn-outline-dark {
+  background: #c4cecf;
+}
+
+h1.display-4.fw-bolder {
+  color: deeppink;
+}
+
+

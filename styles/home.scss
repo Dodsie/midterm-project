@@ -1,17 +1,58 @@
 #home-container1 {
-  border: 3px solid #f37a27;
+  border: 3px solid #706a66;
   border-radius: 5px;
   padding: 15px;
   margin-left: 8em;
   margin-right: 8em;
   margin-bottom: 2em;
+  background: #f4f1ef;
+  display: flex;
+  align-content: flex-end;
+  flex-direction: row-reverse;
+  align-items: center;
 }
 
 #home-container2 {
-  border: 3px solid #f37a27;
+  border: 3px solid #706a66;
   border-radius: 5px;
   padding: 15px;
   margin-left: 8em;
   margin-right: 8em;
+  background: #f4f1ef;
+  display: flex;
+  align-items: center;
+  word-break: break-word;
 }
 
+
+//added today
+
+.py-5 {
+  background: #c4cecf;
+  border-bottom: grey solid 2px;
+    border-top: grey solid 2px;
+}
+
+header#header-top-image {
+  border-top: grey solid 4px;
+}
+
+button.btn.btn-outline-dark {
+  background: #c4cecf;
+}
+
+h1.display-4.fw-bolder {
+  color: deeppink;
+}
+
+img {
+  border: black solid 1px;
+}
+
+.inside-home-2 {
+  padding: 1.5em;
+}
+
+.inside-home-1 {
+  padding: 1.5em;
+}
