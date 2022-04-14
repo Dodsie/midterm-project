@@ -22,11 +22,7 @@ $(() => {
     event.preventDefault();
     window.location.href="/about";
   });
-<<<<<<< HEAD
-  //need to fix this
-=======
 //need to work on this
->>>>>>> 6f2ccab50d0f730b9ee71c0d241d9b54e98bfc2b
   $('.orders-button').on('click', function(event) {
     event.preventDefault();
     window.location.href="users/2/myOrders";

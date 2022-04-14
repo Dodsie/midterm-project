@@ -3,7 +3,7 @@ require("dotenv").config();
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser')
 const twilio = require('twilio');
-const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_ACCOUNT_SID);
+// const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_ACCOUNT_SID);
 
 //require DB setup
 // const { Pool } = require("pg");
