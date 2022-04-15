@@ -25,7 +25,7 @@ $(() => {
 //need to work on this
   $('.orders-button').on('click', function(event) {
     event.preventDefault();
-    window.location.href="users/2/myOrders";
+    window.location.href="/users/2/myOrders";
   });
 
 
